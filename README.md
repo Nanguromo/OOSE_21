@@ -1,3 +1,3 @@
 # OOSE
 
-Contains my personal OOSE practicals and Assignments for 2021
+Contains my personal OOSE Practicals and Assignments for 2021
