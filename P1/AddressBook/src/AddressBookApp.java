@@ -3,13 +3,13 @@ import java.util.*;
 
 /**
  * A simple address book application.
- * @author Dave and ...
+ * @author Dave and Wayne Nanguromo...
  */
 public class AddressBookApp 
 {
     /** Used to obtain user input. */
     private static Scanner input = new Scanner(System.in);
-    
+        
     public static void main(String[] args)
     {
         String fileName, entryName;
@@ -25,7 +25,9 @@ public class AddressBookApp
         catch(IOException e)
         {
             System.out.println("Could not read from " + fileName + ": " + e.getMessage());
+            //MIGHT HAVE TO LOOP THIS LATER
         }
+        
     }
     
     /**
@@ -41,18 +43,22 @@ public class AddressBookApp
         
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
         String line = reader.readLine();
+        
         while(line != null)
         {
+
             String[] parts = line.split(":");
-            
-            // Insert your code here to add a new address book entry.
-            // Note: 
-            // parts[0] contains the person's name.
-            // parts[1], parts[2], etc. contain the person's email address(es).
+
+            addressBook.newEntry(parts);
+
+            //a person can only have one name...right? Hence, part[0] will be their name.
+            //Subsequent part(s) will be emails
             
             line = reader.readLine();
+
         }
         reader.close();
+
         
         return addressBook;
     }
@@ -77,9 +83,12 @@ public class AddressBookApp
                 {
                     case 1:
                         System.out.print("Enter name: ");
-                        String name = input.nextLine();
+                        String name = input.nextLine();       
                         
                         // Insert your code here to find an entry by name and display it.
+                        addressBook.displayEntry(name);
+
+
                         break;
                         
                     case 2:
