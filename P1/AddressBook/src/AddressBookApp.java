@@ -96,6 +96,8 @@ public class AddressBookApp
                         String email = input.nextLine();
                         
                         // Insert your code here to find an entry by email and display it.
+                        addressBook.displayEmail(email);
+
                         break;
                         
                     case 3:
@@ -106,7 +108,7 @@ public class AddressBookApp
             catch(NumberFormatException e)
             {
                 // The user entered something non-numerical.
-                System.out.println("Enter a number");
+                System.out.println("Enter a number!!!!!");
             }
         }
     }

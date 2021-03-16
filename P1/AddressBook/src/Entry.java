@@ -5,6 +5,8 @@ import java.util.*;
  * 
  * @author Wayne Nanguromo
  */
+
+ //This a class simply for details. It stores the name scanned in and the emails. Simply used to hold values, but does not contain anything "complex"
 public class Entry 
 {
     // Insert your code here.
@@ -35,4 +37,26 @@ public class Entry
     {
         return this.emails;
     }
+
+    /*
+    THIS METHOD IS NOT NECESSARY. ALTHOUGH I NEED TO CLARIFY WHETHER HASHMAP() AND EQUALS() IN ADDRESSBOOK NEEDS TO BE WRITTEN AND WHY?
+    public boolean equals(Entry e2)
+    {
+        boolean equals = false;
+        if(this.name.equals(e2.getName()))
+        {
+            Iterator iter = emails.iterator();
+            Iterator iter2 = e2.getEmails().iterator();
+            equals = true;
+            while(iter.hasNext() && iter2.hasNext())
+            {
+                if(!iter.next().equals(iter2.next()))
+                {
+                    return false;
+                }
+            }
+        }
+        return equals;
+    }
+    */
 }
