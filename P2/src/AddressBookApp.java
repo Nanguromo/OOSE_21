@@ -52,6 +52,7 @@ public class AddressBookApp
                         String name = input.nextLine();
 
                         IOption nameOption = options.get(1);// Integer key 1 is assosciated with SearchByName Object which implements IOption
+                        
                         System.out.println(nameOption.doOption(name));
                         
                         //done is still false. User did not specify quitting
@@ -74,6 +75,8 @@ public class AddressBookApp
                         {
                             System.out.println(all.doOption(""));
                         } 
+
+                        break;
                     case 4:
                         done = true;
                         System.out.println("Buh-bye!");
