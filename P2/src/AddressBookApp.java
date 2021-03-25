@@ -24,6 +24,7 @@ public class AddressBookApp
             AddressBook addressBook = aba.readAddressBook(fileName);
             options.put(1, new SearchByName(addressBook));
             options.put(2, new SearchByEmail(addressBook));
+            options.put(3, new SearchAll(addressBook));
             aba.showMenu(); //showMenu asks the user for what type of search option they choose and gets their input returned as a label.
 
         }
@@ -40,7 +41,7 @@ public class AddressBookApp
         
         while(!done)
         {
-            System.out.println("(1) Search by name, (2) Search by email, (3) Quit");
+            System.out.println("(1) Search by name, (2) Search by email, (3) Display all entries, (4) Quit");
             
             try
             {
@@ -66,7 +67,14 @@ public class AddressBookApp
                         //done is still false. User did not specify quitting
                         break;
                         
+    
                     case 3:
+                        IOption all = options.get(3);
+                        if(!all.requiresText())
+                        {
+                            System.out.println(all.doOption(""));
+                        } 
+                    case 4:
                         done = true;
                         System.out.println("Buh-bye!");
                         

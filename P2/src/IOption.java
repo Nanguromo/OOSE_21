@@ -6,4 +6,6 @@ import java.util.*;
 public interface IOption
 {
     public String doOption(String s);   
+
+    public boolean requiresText();
 }

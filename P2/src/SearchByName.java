@@ -36,4 +36,10 @@ public class SearchByName implements IOption
         }
         return outputStr;
     }
+
+    @Override
+    public boolean requiresText()
+    {
+        return true;
+    }
 }

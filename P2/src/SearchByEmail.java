@@ -51,5 +51,11 @@ public class SearchByEmail implements IOption
         
         return outputStr;
     }
+
+    @Override
+    public boolean requiresText()
+    {
+        return true;
+    }
 }
 
