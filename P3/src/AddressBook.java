@@ -1,3 +1,5 @@
+package addressbook.model;
+
 import java.util.*;
 
 /**
