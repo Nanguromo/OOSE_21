@@ -79,6 +79,7 @@ public class MainApplication extends Application
                     imageCaption = parts[1];
                 }
                 
+                album.addPhoto(imageFilename, imageCaption);
                 // Insert your code here to add a new image to the album.
             }
                         

@@ -1,8 +1,8 @@
 ImageRecord.java
  ImageRecord
+Album.java
+ Album
 MainApplication.java
  MainApplication
 MainWindow.java
  MainWindow
-Album.java
- Album

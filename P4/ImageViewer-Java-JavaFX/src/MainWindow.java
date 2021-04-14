@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
 import java.io.File;
+import java.net.URL; //needed fot toURI()
 
 /**
  * Represents the main user interface for the Image Viewer application.
@@ -60,7 +61,9 @@ public class MainWindow
         stage.setTitle("JavaFX Image Viewer");
         
         // *** Fix this code so that it loads the initial (first) image. ***
-        String url = new File("[Initial image filename]").toURI().toString();
+        ImageRecord currImage = album.getFirstPhoto();
+        
+        String url = new File(currImage.getFilename()).toURI().toString();
         imageWidget.setImage(new Image(url));
         
         // Add 'mainBox' to the window. This is a container for holding the other bits: the toolbar, 
@@ -83,7 +86,7 @@ public class MainWindow
         mainBox.setCenter(scroller);
         
         // *** Fix this code so that it displays the caption for the first image. ***
-        captionWidget.setText("[Initial image caption]");
+        captionWidget.setText(currImage.getCaption());
         mainBox.setBottom(captionWidget);
         
         stage.sizeToScene();
@@ -104,9 +107,10 @@ public class MainWindow
     private void prevBtnHandler(ActionEvent event)
     {
         // *** Fix this code so that it actually displays the previous image & caption. ***
-        String url = new File("[Initial image filename]").toURI().toString();
+        ImageRecord imageRecord = album.getPrevPhoto();
+        String url = new File(imageRecord.getFilename()).toURI().toString();
         imageWidget.setImage(new Image(url));
-        captionWidget.setText("[Initial image caption]");
+        captionWidget.setText(imageRecord.getCaption());
     }
 
     /**
@@ -115,8 +119,10 @@ public class MainWindow
     private void nextBtnHandler(ActionEvent event)
     {
         // *** Fix this code so that it actually displays the next image & caption. ***
-        String url = new File("[Initial image filename]").toURI().toString();
+        ImageRecord imageRecord = album.getNextPhoto();
+
+        String url = new File(imageRecord.getFilename()).toURI().toString();
         imageWidget.setImage(new Image(url));
-        captionWidget.setText("[Initial image caption]");
+        captionWidget.setText(imageRecord.getCaption());
     }
 }
