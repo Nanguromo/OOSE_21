@@ -5,7 +5,7 @@ import java.util.*;
  */
 public class Album 
 {
-    private List<ImageRecord> photos;
+    private List<ImageData> photos;
     private int currIdx;
 
     public Album()
@@ -14,18 +14,17 @@ public class Album
         currIdx = 0;
     }
 
-    public void addPhoto(String name, String caption)
+    public void addPhoto(ImageData curRecord)
     {
-        ImageRecord imageRecord = new ImageRecord(name, caption);
-        photos.add(imageRecord);
+        photos.add(curRecord);
     }
 
-    public ImageRecord getFirstPhoto()
+    public ImageData getFirstPhoto()
     {
         return photos.get(0);
     }
 
-    public ImageRecord getNextPhoto()
+    public ImageData getNextPhoto()
     {
         if(currIdx == photos.size() - 1)//at the end of list; loop back to the front
         {
@@ -39,7 +38,7 @@ public class Album
         return photos.get(currIdx);
     }
 
-    public ImageRecord getPrevPhoto()
+    public ImageData getPrevPhoto()
     {
         if(currIdx == 0) //at the start of list; loop backwards
         {

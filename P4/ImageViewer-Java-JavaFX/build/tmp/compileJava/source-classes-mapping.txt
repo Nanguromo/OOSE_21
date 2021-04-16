@@ -1,8 +1,20 @@
 ImageRecord.java
  ImageRecord
-Album.java
- Album
-MainApplication.java
- MainApplication
+ImageData.java
+ ImageData
 MainWindow.java
  MainWindow
+Album.java
+ Album
+MetaData.java
+ MetaData
+MainApplication.java
+ MainApplication
+GPS.java
+ GPS
+Date.java
+ Date
+Caption.java
+ Caption
+Rating.java
+ Rating

@@ -1,25 +1,41 @@
 /**
  * Represents an image in an album.
  */
-public class ImageRecord
+public class ImageRecord implements ImageData
 {
     private String filename;
-    private String caption;
     
-    public ImageRecord(String newFilename, String newCaption)
+    public ImageRecord(String newFilename)
     {
-        filename = newFilename;
-        caption = newCaption;
+        filename = newFilename; 
+        //caption = newCaption;
+    }
+
+    @Override
+    public void setMetaData()
+    {
+        //fileName = this.fileName;
     }
     
+    @Override
     public String getFilename()
     {
         return filename;
     }
     
-    public String getCaption()
-    {
-        return caption;
-    }
+    @Override
+    public String getMetadata(){return "";}
+
+    @Override
+    public String getCaption(){return "";}
+
+    @Override
+    public String getGPS(){return "";}
+
+    @Override
+    public String getRating(){return "";}
+
+    @Override
+    public String getDate(){return "";}
 }
 

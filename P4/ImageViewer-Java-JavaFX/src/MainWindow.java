@@ -55,14 +55,24 @@ public class MainWindow
      * Builds the main UI, based on an Album and a JavaFX 'Stage' (which is basically a 
      * pre-existing window).
      */
-    public void show()
+    public void show() //throws NullPointerException
     {
+        System.out.println("second check value of album: " + album);
         Platform.setImplicitExit(true);
         stage.setTitle("JavaFX Image Viewer");
-        
+        System.out.println("Value of first photo: "+album.getFirstPhoto() );
         // *** Fix this code so that it loads the initial (first) image. ***
-        ImageRecord currImage = album.getFirstPhoto();
+        ImageData currImage = album.getFirstPhoto();
         
+        //debug
+        try
+        {
+          System.out.println(currImage + "hi");   
+        }catch(NullPointerException e)
+        {
+            System.out.println("faulty");
+        }
+
         String url = new File(currImage.getFilename()).toURI().toString();
         imageWidget.setImage(new Image(url));
         
@@ -86,7 +96,7 @@ public class MainWindow
         mainBox.setCenter(scroller);
         
         // *** Fix this code so that it displays the caption for the first image. ***
-        captionWidget.setText(currImage.getCaption());
+        captionWidget.setText(currImage.getMetadata());
         mainBox.setBottom(captionWidget);
         
         stage.sizeToScene();
@@ -107,10 +117,10 @@ public class MainWindow
     private void prevBtnHandler(ActionEvent event)
     {
         // *** Fix this code so that it actually displays the previous image & caption. ***
-        ImageRecord imageRecord = album.getPrevPhoto();
+        ImageData imageRecord = album.getPrevPhoto();
         String url = new File(imageRecord.getFilename()).toURI().toString();
         imageWidget.setImage(new Image(url));
-        captionWidget.setText(imageRecord.getCaption());
+        captionWidget.setText(imageRecord.getMetadata());
     }
 
     /**
@@ -119,10 +129,10 @@ public class MainWindow
     private void nextBtnHandler(ActionEvent event)
     {
         // *** Fix this code so that it actually displays the next image & caption. ***
-        ImageRecord imageRecord = album.getNextPhoto();
+        ImageData imageRecord = album.getNextPhoto();
 
         String url = new File(imageRecord.getFilename()).toURI().toString();
         imageWidget.setImage(new Image(url));
-        captionWidget.setText(imageRecord.getCaption());
+        captionWidget.setText(imageRecord.getMetadata());
     }
 }
