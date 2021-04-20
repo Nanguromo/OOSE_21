@@ -9,11 +9,12 @@ public class PartOfCity implements ICity
     //only leaf nodes hold power consumption categories
     private Map<String, Double> powerCategory; /*abbreviations are the key (String). Double object holds the power consumption (double) for a specific category.
                                                 this is done only categories with values can be set, i.e. they actually exist*/
+    private String name;
 
-    public PartOfCity()
+    public PartOfCity(String name)
     {
         powerCategory = new HashMap<String, Double>();//hash map over tree map; Find key in O(1) verse O(logn), respectively. Also dont care about ordering; was never explicity stated in assignment
-
+        this.name = name;
     }
 
     @Override
@@ -37,5 +38,10 @@ public class PartOfCity implements ICity
         return "";
 
     }
+
+    @Override
+    public String getName(){return this.name;}
+
+    
 
 }

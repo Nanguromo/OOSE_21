@@ -5,76 +5,76 @@ import java.io.*;
 /*
 * Deals with View portion of MVC. This class makes use of the IInput and IOutput Interfaces who both implement The Strategy Pattern
 */
-
-public class ElectricityView
+public class ElectricityView 
 {
-    private String[] input;
-    private String filenameOut;
-    private String filenameIn;
-    public String specificErrorMsg;
+    private Map<String, IOption> options;
+    private IOption option1;
+    private IOption option2;
+    private String[] args;
 
     public ElectricityView(String[] args)
     {
-        if(checkSize())
-        {
-            if(this.isValid())
-            {
-                this.input = args;
-                //this.filename
-            }
-            else
-            {
+        options = new HashMap<String, IOption>();
+        options.put("-r", new Read(args));
+        options.put("-g", new Generate(args));
+        options.put("-w", new Write(args));
+        options.put("-d", new Display(args));
 
-            }
-        }
-        else
-        {
-            System.out.println("Error: You must enter two arguments!\n"); 
-            this.displayCommonErrorMessage();
-            System.exit(0);//exit "gracefully"
-        }
+        this.args = args;
+        option1 = null;
+        option2 = null;
     }
 
-    //checks if command line arguments are valid. If not program exits with an error telling the user what went wrong
-    //this is too convoluted... surely there is some pattern that can check all the command line argument's validity?
-    private boolean isValid()
+    public IOption getFirstOption()
     {
-        boolean valid = false;
-
-        if(!input[0].equals(input[1]))//ensures argument 1 and 2 are never the same. Furthermore, prevents reading from a while called "-r".
+        option1 = options.get(args[0]); //get first argument
+        if(option1 == null)
         {
-            if(input[0].equals("-g") || input[0].equals("-r"))//Now checks to make sure argument one is either generate or read
-            {
-                if(input[0].equals("-r")) //If argument 1 was read, we now check
-                {
+            System.out.println("Error: First argument must either be \"-r\" to read from a file or \"-g\" to generate data");
+            System.exit(1);//exit gracefully
+        }
+        return option1;
+    }
 
-                }
-                else
-                {
-                    if(input[1].equals("-w") || input[1].equals("-d"))//ensures 
-                    {
-                        if( !(input[0].equals(input[1])) )
-                        {
-                        
-                        }
-                    }
-                }
+    public IOption getSecondOption()
+    {
+        //this method is called only if program has not exit yet. Does not make sense to get second option before the first!
+        if(option1 instanceof Read)
+        {
+            option2 = options.get(args[2]);// get third argument. Second argument was filename from read
+
+            //check to see if option 2 was found. If option 2 wasnt found, the user entered an invalid command line argument; display error and exit
+            if(option2 == null)
+            {
+                System.out.println("Error: Third argument must either be \"-w\" to write a file or \"-d\" to display data");
+                System.exit(1);
             }
         }
+
+        if(option1 instanceof Generate)
+        {
+            option2 = options.get(args[1]); //get second argument
+
+            //check to see if option 2 was found. If option 2 wasnt found, the user entered an invalid command line argument; display error and exit
+            if(option2 == null)
+            {
+                System.out.println("Error: Second argument must either be \"-w\" to write a file or \"-d\" to display data");
+                System.exit(1);
+            }
+        }
+
+        return option2; //guaranteed to be non-null because of checks within the method. If option2 was null at any point within the nested if statements; 
+        //option 2 was not found, hence, the program would have exit already!
     }
 
-    private boolean checkSize()
+    public boolean checkReadWriteValid()//checks if read and write filenames are unique
     {
-        boolean valid = false;
+        boolean valid = true;
+        if(option1.getFilename().equals(option2.getFilename()))
+        {
+            valid = false;
+        }
+        return valid;
+    }
 
-        if()
-    }
-    
-    private void displayCommonErrorMessage()
-    {
-        System.out.println("Argument (1) may either be '-g' to generate, or 'r' to read from a file");
-        System.out.println("Argument (2)) may either be '-d' to display to the results to the terminal, or 'w' to write results to a file");
-        System.out.println("If 'r' or 'w' are entered, a filename must be entered as well, directly after the two arguments respectively. Files must be unique!");
-        System.out.println("For example entering: \"java -jar ElectricityUsage.jar -r file1.csv -w file2.csv\" is a valid.");
-    }
 }

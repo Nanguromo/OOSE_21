@@ -10,10 +10,14 @@ public class CompositeCity implements ICity
     //ComposisiteCity Objects are not leaf nodes. Hence, cannot hold power categories and power consumption values.
 
     private List<ICity> children; // List holds ICity objects. Hence, can be either more CompositeCity Objects or PartOfCity Objects (leaf nodes)
+    private String name;
+    //private int depth;
 
-    public CompositeCity()
+    public CompositeCity(String name)
     {
         children = new LinkedList<ICity>(); //iterating through a linked list and array list is both O(n). The list serves the purpose of allowing iteration through every child node.
+        this.name = name;
+        //this.depth;//used for finding depths for randomly generating a tree
     }
 
     @Override
@@ -21,7 +25,7 @@ public class CompositeCity implements ICity
     {
         double totalPowerConsumption = 0.0;
 
-        //iteratte through every ICity element in the list
+        //iterate through every ICity element in the list
         for(ICity currNode : children)
         {
             totalPowerConsumption = currNode.getTotalPowerConsumption(); //total power consumption is calculated recursively.
@@ -40,6 +44,9 @@ public class CompositeCity implements ICity
         //to the Controller who can that pass that to the View
         return "";
     }
+
+    @Override
+    public String getName(){return this.name;}
 
     public void addSubcity(ICity subCity)
     {

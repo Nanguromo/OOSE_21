@@ -1,7 +1,7 @@
 package electricityusage.app.view;
 import java.util.*;
 
-public interface IOutput
+public interface IOption
 {
-    public void output();
+    public void doOption();
 }
