@@ -17,15 +17,19 @@ public class ElectricityUsageMainApp
     public static void main(String [] args)
     {
         //Command line arguments should be taken and passed into View to allow it do to View things...
+        //Model also takes args to do perform operations on the data, based on args received
+        //Controller serves as a medium between the Model and View. Model and View never directly interact. All interactions occur through the Controller
+        //View is very simply due to not requiring a GUI. All it does it print to terminal
+        //Model utilises The Composite Pattern and The Strategy Pattern to perform operations on the data and to identify what operation needs to be performed based on the command line args
 
-        //This method should provide create the MVC Objects. Within the MVC Objects, they should implement (1) The Strategy Pattern and (2) The Composite Pattern
+        //This method creates the MVC Objects and operates the program through the Controller's functions
 
-        /*try
-        {
-            //try create MVC Objects. Catch errors, i.e. if object creation was failed. e.g trying to create View but View checks args and it is deemed to be faulty, hence, throws an error
-        }*/
-    
+        ElectricityModel model = new ElectricityModel(args);
+        ElectricityView view = new ElectricityView(args);
 
-        System.out.println("Hello World\n");
+        ElectricityController controller = new ElectricityController(model, view);
+
+        controller.doFirstOption();
+        controller.doSecondOption();
     }
 }

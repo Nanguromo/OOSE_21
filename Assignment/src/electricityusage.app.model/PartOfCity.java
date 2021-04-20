@@ -26,6 +26,8 @@ public class PartOfCity implements ICity
         for(Map.Entry<String, Double> entry : powerCategory.entrySet()) 
         {
             totalPowerConsumption += entry.getValue().doubleValue();//Convert Double Object to double primitive
+            //System.out.println(name);
+            //System.out.println("made it to here");
         }
 
         return totalPowerConsumption;
@@ -42,6 +44,15 @@ public class PartOfCity implements ICity
     @Override
     public String getName(){return this.name;}
 
+    public void addPowerCategory(String category, double value)
+    {
+        powerCategory.put(category, value);
+    }
+    /*@Override
+    public void findComposite(ICity subCity, String key)
+    {
+        //do nothing. Exit recursion. PartOfCity is the leaf node, hence cannot have children.
+    }*/
     
 
 }

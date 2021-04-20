@@ -1,4 +1,4 @@
-package electricityusage.app.view;
+package electricityusage.app.model;
 import java.util.*;
 import java.io.*;
 

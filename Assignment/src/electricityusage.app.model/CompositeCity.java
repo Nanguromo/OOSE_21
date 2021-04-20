@@ -28,7 +28,8 @@ public class CompositeCity implements ICity
         //iterate through every ICity element in the list
         for(ICity currNode : children)
         {
-            totalPowerConsumption = currNode.getTotalPowerConsumption(); //total power consumption is calculated recursively.
+            totalPowerConsumption += currNode.getTotalPowerConsumption(); //total power consumption is calculated recursively.
+            //System.out.println(name);
         }
 
         return totalPowerConsumption;
@@ -46,10 +47,39 @@ public class CompositeCity implements ICity
     }
 
     @Override
-    public String getName(){return this.name;}
+    public String getName()
+    {
+        return this.name;
+    } 
 
     public void addSubcity(ICity subCity)
     {
         children.add(subCity);
+    }
+
+    public void findComposite(ICity subCity, String key)
+    {
+        //System.out.println("function reached");
+        if(key.equals(this.name))//this is for the root node. If I dont put this here, the tree is never created and the rest of the compositive nodes can connect because the root has no child!
+        {
+            this.addSubcity(subCity);
+        }
+        for(ICity currNode: children)
+        {
+            //System.out.println("and here");
+            if(currNode instanceof CompositeCity)
+            {
+                //System.out.println("instance was reached");
+                if(currNode.getName().equals(key))
+                {
+                    ((CompositeCity)currNode).addSubcity(subCity);
+                    //System.out.println("found->"+subCity.getName());
+                }
+                else
+                {
+                    ((CompositeCity)currNode).findComposite(subCity, key);//recursively finds the matching key
+                }
+            }
+        }
     }
 }
