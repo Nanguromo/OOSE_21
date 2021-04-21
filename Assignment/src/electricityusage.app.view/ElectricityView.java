@@ -20,6 +20,10 @@ public class ElectricityView
 
     }
 
+    public void display(String str)
+    {
+        System.out.println(str);
+    }
     /*public boolean checkReadWriteValid()//checks if read and write filenames are unique
     {
         boolean valid = true;

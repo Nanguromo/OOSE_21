@@ -33,8 +33,8 @@ public class ElectricityModel
         //Don't know what option user wants, just have keys to locate IOption objects within a map that implement a specific operation
         operations.put("-r", new Read(args));
         operations.put("-g", new Generate(args));
-        operations.put("-w", new Write(args));
-        operations.put("-d", new Display(args));
+        
+        
     }
 
     public IOption getFirstOption()throws IllegalArgumentException
@@ -52,21 +52,28 @@ public class ElectricityModel
         return op1;
     }
 
+    //this method is called only if program has not exit yet. Does not make sense to get second option before the first!
     public IOption getSecondOption()throws IllegalArgumentException,ArrayIndexOutOfBoundsException
     {
-        //this method is called only if program has not exit yet. Does not make sense to get second option before the first!
+        operations.put("-w", new Write(args, op1.getCity())); //only add these otions to the map after option has been performed. They rely on having a Composite city existing!
+        operations.put("-d", new Display(args, op1.getCity()));
+
         try
         {
-            if(op1 instanceof Read)
+            if(op1 instanceof Read) //depending if argument 1 was Read or Generate, the order number of args will change. Need to check to prevent ArrayIndexOutOfBoundsException
             {
-                if(args[2].equals(args[0]))//prevent entering the same command line argument twice
+                if(args[2].equals("-g"))
+                {
+                        throw new IllegalArgumentException("Error: Cannot read from a file \"-r\" AND generate \"-g\" data!");
+                }
+                else if(args[2].equals(args[0]))//prevent entering the same command line argument twice
                 {
                     throw new IllegalArgumentException("Error: Cannot have same arguments \"-r\" twice!. Arguments must be unique.");
                 }
                 else
                 {
                     op2 = operations.get(args[2]);// get third argument. Second argument was filename from read
-                    System.out.println("got to read");
+                    //System.out.println("got to read");
 
                     //check to see if option 2 was found. If option 2 wasnt found, the user entered an invalid command line argument; display error and exit
                     if(op2 == null)
@@ -78,7 +85,11 @@ public class ElectricityModel
 
             if(op1 instanceof Generate)
             {
-                if(args[0].equals(args[1])) //prevent entering the same command line argument twice
+                if(args[1].equals("-r"))
+                {
+                        throw new IllegalArgumentException("Error: Cannot read from a file \"-r\" AND generate \"-g\" data!");
+                }
+                else if(args[0].equals(args[1])) //prevent entering the same command line argument twice
                 {
                     throw new IllegalArgumentException("Error: Cannot have same arguments \"-g\" twice!. Arguments must be unique.");
                 }
@@ -97,6 +108,10 @@ public class ElectricityModel
         catch(ArrayIndexOutOfBoundsException e)
         {   
             throw new ArrayIndexOutOfBoundsException("Error: You must enter the second argument which may either be \"-w\" to write to a file or \"-d\" to display data");
+        }
+        catch(IllegalArgumentException e)
+        {
+            throw new IllegalArgumentException(e.getMessage());
         }
         
         return op2; //guaranteed to be non-null because of checks within the method. If option2 was null at any point within the nested if statements; 

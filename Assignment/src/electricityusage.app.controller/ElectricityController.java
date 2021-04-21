@@ -40,7 +40,7 @@ public class ElectricityController
          try
          {
              IOption op = model.getFirstOption();
-             op.doOption();
+             String temp = op.doOption();
          }
          catch(IllegalArgumentException e)
          {
@@ -63,7 +63,8 @@ public class ElectricityController
         try
         {
             IOption op = model.getSecondOption();
-            op.doOption();
+            String writeordisplay = op.doOption();
+            view.display(writeordisplay);
         }
         catch(IllegalArgumentException e)
         {

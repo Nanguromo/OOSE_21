@@ -13,4 +13,10 @@ public interface ICity
     public String toString();//gets all the leaf nodes power consumptions, name, etc in a formatted String that is it to be passed to the Controller who then passed the String to the View
 
     public String getName();
+
+    public void setDepth(int depth);
+
+    public int getDepth();
+
+
 }

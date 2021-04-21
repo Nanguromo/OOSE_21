@@ -3,11 +3,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
+
 public interface IOption
 {
-    public void doOption() throws IOException, FileNotFoundException;
+    public String doOption() throws IOException, FileNotFoundException, IllegalArgumentException;
 
     public String getFilename();
+
+    public CompositeCity getCity();
 
     //public void findComposite(IOption, String);
 }

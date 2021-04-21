@@ -10,11 +10,14 @@ public class PartOfCity implements ICity
     private Map<String, Double> powerCategory; /*abbreviations are the key (String). Double object holds the power consumption (double) for a specific category.
                                                 this is done only categories with values can be set, i.e. they actually exist*/
     private String name;
+    private int k;//depth;
+
 
     public PartOfCity(String name)
     {
         powerCategory = new HashMap<String, Double>();//hash map over tree map; Find key in O(1) verse O(logn), respectively. Also dont care about ordering; was never explicity stated in assignment
         this.name = name;
+        //this.k = depth;
     }
 
     @Override
@@ -34,11 +37,33 @@ public class PartOfCity implements ICity
     }
 
     @Override
+    public void setDepth(int depth)
+    {
+        this.k = depth;
+    }
+
+    @Override
     public String toString()
     {
-        //come back to this later when I know what View is doing
-        return "";
+        int indent = 3*(this.k-1); 
+        char[] spaces;
+        String whitespace;
+        if(this.k != 1)
+        {
+            spaces = new char[indent];
+            for(int i = 0; i < spaces.length; i++)
+            {
+                spaces[i] = ' ';
+            }
+            whitespace = new String(spaces);
+        }
+        else
+        {
+            whitespace = "";
+        }
+        String display = whitespace+this.name;
 
+        return display;
     }
 
     @Override
@@ -48,11 +73,7 @@ public class PartOfCity implements ICity
     {
         powerCategory.put(category, value);
     }
-    /*@Override
-    public void findComposite(ICity subCity, String key)
-    {
-        //do nothing. Exit recursion. PartOfCity is the leaf node, hence cannot have children.
-    }*/
-    
 
+    @Override
+    public int getDepth(){return this.k;}
 }
