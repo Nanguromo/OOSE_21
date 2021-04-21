@@ -67,6 +67,35 @@ public class PartOfCity implements ICity
     }
 
     @Override
+    public String getWriteString()//{return this.name + ",";}
+    {
+        return "";
+    }
+
+    @Override
+    public String getWritePowerString()
+    {
+        String powerStr = ",";
+        int size = powerCategory.size();
+        int i = 1;
+        for(Map.Entry<String, Double> entry : powerCategory.entrySet()) 
+        {
+            if(i < size)
+            {
+                powerStr += entry.getKey() + "=" + entry.getValue().doubleValue() + ",";//Convert Double Object to double primitive
+                i++;
+            }
+            else
+            {
+                powerStr += entry.getKey() + "=" + entry.getValue().doubleValue() + "%n";//Convert Double Object to double primitive
+                i++;
+            }
+        }
+        
+        return powerStr;
+    }
+
+    @Override
     public String getName(){return this.name;}
 
     public void addPowerCategory(String category, double value)

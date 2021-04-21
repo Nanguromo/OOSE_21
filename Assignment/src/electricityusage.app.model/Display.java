@@ -11,12 +11,14 @@ import electricityusage.app.model.CompositeCity;
 public class Display implements IOption
 {
     private String[] args;
-    public CompositeCity city;
-
-    public Display(String[] args, CompositeCity city)
+    private CompositeCity city;
+    private IOption option1;
+    
+    public Display(String[] args, CompositeCity city, IOption option1)
     {
         this.args = args;
         this.city = city;
+        this.option1 = option1;
     }
 
     @Override

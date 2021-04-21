@@ -18,5 +18,7 @@ public interface ICity
 
     public int getDepth();
 
+    public String getWriteString();
 
+    public String getWritePowerString();
 }

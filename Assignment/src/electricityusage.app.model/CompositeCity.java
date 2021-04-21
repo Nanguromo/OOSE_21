@@ -13,12 +13,14 @@ public class CompositeCity implements ICity
     private String name;
     private int k; //depth
     private String display;
+    private String writeString;
 
     public CompositeCity(String name)
     {
         this.children = new LinkedList<ICity>(); //iterating through a linked list and array list is both O(n). The list serves the purpose of allowing iteration through every child node.
         this.name = name;
         this.display = "";
+        this.writeString = "";
         //this.depth;//used for finding depths for randomly generating a tree
     }
 
@@ -87,6 +89,39 @@ public class CompositeCity implements ICity
 
     @Override
     public int getDepth(){return this.k;}
+
+    @Override
+    public String getWriteString()
+    {
+        //writeString = this.name + "%n";
+
+        if(this.k == 1)//at root. First line of write file
+        {
+            writeString = this.name + "%n";
+        }/*
+        else
+        {
+            writeString = this.name + ",";
+        }*/
+
+        for(ICity currNode: children)
+        {
+            writeString +=  currNode.getName() + "," + this.name + currNode.getWritePowerString();//+ "%n";
+        }
+        for(ICity currNode: children)
+        {
+            writeString += currNode.getWriteString();
+        }
+        //writeString += "%n";
+
+        return writeString;
+    }
+
+    @Override 
+    public String getWritePowerString()
+    {
+        return "%n";
+    }
 
     public void addSubcity(ICity subCity)
     {

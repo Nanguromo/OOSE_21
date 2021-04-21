@@ -55,8 +55,8 @@ public class ElectricityModel
     //this method is called only if program has not exit yet. Does not make sense to get second option before the first!
     public IOption getSecondOption()throws IllegalArgumentException,ArrayIndexOutOfBoundsException
     {
-        operations.put("-w", new Write(args, op1.getCity())); //only add these otions to the map after option has been performed. They rely on having a Composite city existing!
-        operations.put("-d", new Display(args, op1.getCity()));
+        operations.put("-w", new Write(args, op1.getCity(), op1)); //only add these options to the map after option has been performed. They rely on having a Composite city existing!
+        operations.put("-d", new Display(args, op1.getCity(), op1));
 
         try
         {

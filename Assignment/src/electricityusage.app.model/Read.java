@@ -16,6 +16,7 @@ public class Read implements IOption
     private String[] args;
     private String readFilename;
     private CompositeCity readCity;
+    private boolean visited = false;
 
     public Read(String[] args)
     {
@@ -53,9 +54,16 @@ public class Read implements IOption
 
                     if(parts.length == 1)//First line exists. Root node was found. parts[0]-> name of root
                     {
-                        city = new CompositeCity(parts[0]);//depth, k = 1 here as it is currently the root node.
-                        city.setDepth(1);//root
-                        //System.out.println(city.getName());
+                        if(!visited)
+                        {
+                            city = new CompositeCity(parts[0]);//depth, k = 1 here as it is currently the root node.
+                            city.setDepth(1);//root
+                            visited = true;
+                        }
+                        else
+                        {
+                            throw new IllegalArgumentException("Error: While reading the file, two root nodes were found!\n");
+                        }
                     }
                     if(parts.length == 2)//found a composite node. parts[0]-> name of new composite. parts[1]-> name of parent composite
                     {
