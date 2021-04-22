@@ -1,5 +1,6 @@
 package electricityusage.app.model;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 /*
 * Represents Composite Class of the Composite Pattern
@@ -76,11 +77,7 @@ public class CompositeCity implements ICity
             display += currNode.toString();
         }
         //this.toStr = display;
-        //come back to this later when I know what View is doing
-
-        //when I do this method:
-        //remember to use recursion. This means I don't kneed a class field String as the final recurse will return the resultant String
-        //to the Controller who can that pass that to the View
+        
         return display;
     }
 
@@ -128,6 +125,83 @@ public class CompositeCity implements ICity
         children.add(subCity);
     }
 
+
+    @Override
+    public void generateCity(int maxDepth, int ctr)
+    {
+        //this method is called on the root node from Generate Class
+        //int k = ThreadLocalRandom.current().nextInt(1, 5+1);//5+1 is the upper bound limit for the random generator. It is not inclusive, hence 5+1 means the limit is 5 which is <6.
+
+        if(maxDepth == 1)//tree consists of only root node.
+        {
+            return;
+        }
+
+        if(this.k < maxDepth - 1)
+        {
+            int numChildred = ThreadLocalRandom.current().nextInt(2,5+1);//upper bound is 5. Random num of children = [2,5]
+            for(int i = 0; i < numChildred; i++)
+            {
+                int randChild = ThreadLocalRandom.current().nextInt(1,2+1);// upper bound is 1. This one is 50-50 change. If 1-> Create a leaf node child. If 2-> Create a composite node child
+                if(randChild == 1)//create leaf
+                {
+                    PartOfCity temp = new PartOfCity("Building" + ctr);
+                    temp.setDepth(this.k + 1);
+                    temp.addPowerCategory("dm", ThreadLocalRandom.current().nextDouble(0.0, 1000.1));
+                    temp.addPowerCategory("da", ThreadLocalRandom.current().nextDouble(0.0, 1000.1));
+                    temp.addPowerCategory("de", ThreadLocalRandom.current().nextDouble(0.0, 1000.1));
+                    temp.addPowerCategory("em", ThreadLocalRandom.current().nextDouble(0.0, 1000.1));
+                    temp.addPowerCategory("ea", ThreadLocalRandom.current().nextDouble(0.0, 1000.1));
+                    temp.addPowerCategory("ee", ThreadLocalRandom.current().nextDouble(0.0, 1000.1));
+                    temp.addPowerCategory("h", ThreadLocalRandom.current().nextDouble(0.0, 1000.1));
+                    temp.addPowerCategory("s", ThreadLocalRandom.current().nextDouble(0.0, 1000.1));
+
+                    this.addSubcity(temp);
+                    ctr++;
+
+                }
+                else//create composite
+                {
+                    CompositeCity temp = new CompositeCity("Subcity" + ctr);
+                    temp.setDepth(this.k + 1);
+                    this.addSubcity(temp);
+
+                    ctr++;
+                }
+            }
+
+            for(ICity currNode: children)//recursively goes through created children and adds new children until max depth reached
+            {
+                currNode.generateCity(maxDepth, ctr);
+            }
+        }  
+        
+        if(this.k == maxDepth - 1)//when depth of k-1 is reached, all composite nodes at depth k-1, must only have leaf node children (PartOfCity Objects)    
+        {
+            int numChildred = ThreadLocalRandom.current().nextInt(2,5+1);//upper bound is 5. Random num of children = [2,5]
+            for(int i = 0; i < numChildred; i++)
+            {
+                int randChild = ThreadLocalRandom.current().nextInt(1,2+1);
+                PartOfCity temp = new PartOfCity("Building" + ctr);
+                
+                temp.setDepth(this.k + 1);
+
+                temp.addPowerCategory("dm", ThreadLocalRandom.current().nextDouble(0.0, 1000.1));
+                temp.addPowerCategory("da", ThreadLocalRandom.current().nextDouble(0.0, 1000.1));
+                temp.addPowerCategory("de", ThreadLocalRandom.current().nextDouble(0.0, 1000.1));
+                temp.addPowerCategory("em", ThreadLocalRandom.current().nextDouble(0.0, 1000.1));
+                temp.addPowerCategory("ea", ThreadLocalRandom.current().nextDouble(0.0, 1000.1));
+                temp.addPowerCategory("ee", ThreadLocalRandom.current().nextDouble(0.0, 1000.1));
+                temp.addPowerCategory("h", ThreadLocalRandom.current().nextDouble(0.0, 1000.1));
+                temp.addPowerCategory("s", ThreadLocalRandom.current().nextDouble(0.0, 1000.1));
+
+                this.addSubcity(temp);
+                ctr++;
+            }
+        }
+
+    }
+
     public void addComposite(ICity subCity, String key)
     {
         //System.out.println("function reached");
@@ -161,6 +235,7 @@ public class CompositeCity implements ICity
         {
             compDepth = this.k;
         }
+
         for(ICity currNode: children)
         {
             //System.out.println("and here");

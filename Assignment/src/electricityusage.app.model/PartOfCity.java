@@ -98,11 +98,17 @@ public class PartOfCity implements ICity
     @Override
     public String getName(){return this.name;}
 
+    @Override
+    public int getDepth(){return this.k;}
+
+    @Override
+    public void generateCity(int maxDepth, int ctr)
+    {
+     return; //do nothing. Leaf nodes cannot generate children   
+    }
+
     public void addPowerCategory(String category, double value)
     {
         powerCategory.put(category, value);
     }
-
-    @Override
-    public int getDepth(){return this.k;}
 }

@@ -1,5 +1,6 @@
 package electricityusage.app.model;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.io.*;
 import electricityusage.app.model.CompositeCity;
 import electricityusage.app.model.ICity;
@@ -23,6 +24,11 @@ public class Generate implements IOption
     public String doOption() //this doOption randomly generates data. Should read from a txt file with a list of names to be selected from
     {
         //Generate's doOption() should perform this function using The Composite Pattern ??????
+        CompositeCity root = new CompositeCity("Perth");
+        root.setDepth(1);
+        root.generateCity(ThreadLocalRandom.current().nextInt(1, 5+1), 1);//5+1 is the upper bound limit for the random generator. It is not inclusive, hence 5+1 means the limit is 5 which is <6.
+        
+        this.generatedCity = root;
         return "";
     }
 

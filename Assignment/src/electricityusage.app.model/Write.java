@@ -31,16 +31,25 @@ public class Write implements IOption
                     //arg[0]p-> -r, arg [1]-> filename1, arg[2]-> -w, arg[3]-> filename2
                     
                     //check for duplicate names
+                    if(args.length != 4)
+                    {
+                        throw new IllegalArgumentException("Error: A writefile must be entered after \"-w\" which must be different from the readfile!");
+                    }
                     if(this.foundDuplicateName(args[1], args[3]))
                     {
                         throw new IllegalArgumentException("Error: Cannot have same read and write filenames! They must be unique.\n");
                     }
+                    
 
                     writeFilename = args[3];
                 }
                 else//was Generate
                 {
                     //arg[0]-> -g, arg[1]-> -w , arg[2]->filename
+                    if(args.length != 3)
+                    {
+                        throw new IllegalArgumentException("Error: A writefile must be entered after \"-w\"!");
+                    }
                     writeFilename = args[2];
 
                 }

@@ -21,4 +21,6 @@ public interface ICity
     public String getWriteString();
 
     public String getWritePowerString();
+
+    public void generateCity(int maxDepth, int ctr);
 }
