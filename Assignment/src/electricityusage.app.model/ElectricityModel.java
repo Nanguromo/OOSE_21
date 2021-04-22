@@ -16,14 +16,11 @@ public class ElectricityModel
     private IOption op1;
     private IOption op2;
 
-    private int ctr; //for making unique leaf node names
-    private int ctr2; // for making unique composite node names
+    //private int ctr; for making unique leaf node names
+    //private int ctr2;  for making unique composite node names
 
     public ElectricityModel(String[] args)
     {
-        //this.compCity = new CompositeCity("Perth");
-        //ctr = 1;
-        //ctr2 = 1;
         this.args = args;
         this.op1 = null;
         this.op2 = null;
@@ -117,46 +114,4 @@ public class ElectricityModel
         return op2; //guaranteed to be non-null because of checks within the method. If option2 was null at any point within the nested if statements; 
         //option 2 was not found, hence, the program would have exit already!
     }
-
-
-    /*public void addSubcity(ICity subCity) //wrapper method. CompositeCity is directly a part of the internal workings of this class. Hence, using a wrapper method
-    {
-        compCity.addSubcity(subCity); 
-    }*/
-
-    /*public CompositeCity generate()//generates random city and subcities. For each leaf node, all power categories are randomdly generated between (0.0 kW, 1000.0 kW) 
-    {
-        // 1. Randomly generate the tree depth, k, between 1 and 5 inclusive. k = 1 means the tree consists only of a root node.
-        int k = ThreadLocalRandom.current().nextInt(1, 5+1); //nextInt(origin, bound). bount is exclusive, hence, make it 6 so that it takes 5 as its max!
-        int numChildNodes;
-        int randLeafOrComposite;
-        
-        for(int i=1; i<k; i++)
-        {
-            numChildNodes = ThreadLocalRandom.current().nextInt(2,5+1);
-            randLeafOrComposite = ThreadLocalRandom.current().nextInt(1, 2+1);//if 1-> create a leaf. If 2-> create a composite.
-            
-            for(j=2; j < numChildNodes; j++)
-            {
-                if(i == k-1) //at this point, every child node should be a leaf, so they can have a power consumption category and values.
-                {
-                    compCity.addSubcity(new PartOfCity("building" + ctr++));
-                }
-                else
-                {
-                    if(randLeafOrComposite == 1)//create a leaf
-                    {
-                        
-                    }
-                    else//create a composite
-                    {
-
-                    }
-
-                }
-            }
-        }
-
-        return compCity;
-    }*/
 }

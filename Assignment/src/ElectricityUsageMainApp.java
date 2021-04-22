@@ -4,16 +4,15 @@ import electricityusage.app.controller.*;
 import java.util.*;
 import java.io.*;
 
+/*Author: Wayne Nanguromo
+Student ID: 19480060
+Created: 18 April, 2021
+*/
+
+//Contains main method for city's electricity usage application
 public class ElectricityUsageMainApp
 {
-    /*Contains main method for city's electricity usage application. 
-    *
-    */
-    /*Author: Wayne Nanguromo
-    Student ID: 19480060
-    Created: 18 April, 2021
-    */
-    
+   
     public static void main(String [] args)
     {
         //Command line arguments should be taken and passed into View to allow it do to View things...

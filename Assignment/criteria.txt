@@ -1,0 +1,59 @@
+Author: Wayne Nanguromo
+Student ID: 19480060
+
+Criterion 1. Appropriate use of containers.
+
+It was clear from the problem description that the program would require frequent searching for specific parts and also would require iteration. As a result I used Maps to allow O(1)
+find() for a given key, especially when a hash map implementation was used. Furthermore, due to the data being stored in a tree like structure, I used Lists to allow easy and simple iteration 
+with a for-each loop. After self reflection, I release a smarter software design choice would to possibly use a two dimensional map to implement the tree described in the problem description. 
+Futhermore, even a set could have been used due to only allowing unique objects. Hence, no duplicates cities or sub cities would be found in the tree. Despite this, due implementing my design with 
+a map and linked list as the main containers; it still allowed me to keep a low coupled design, especially when implementing the Strategy and Composite pattern, as described later. The only 
+downside I can think of is if I had used a two dimensional map for finding in the tree, the time complexity would be O(1) compared to iterating through a linked list, O(n) to find an object.
+
+Criterion 2. Clear and distinct package/class/interface/method responsibilities
+
+As this criterion stated "package", it instantly hinted towards using Model-View-Controller (MVC) design. As a result, I did. This allowed me to create the View and Model classes with no coupling. 
+If my View were to have been a GUI, which is much more complex than displaying to the terminal, I could have worked on the View without having to depend on the Model. Within my Model package, it
+contained simple data classes as well as classes that performed operations on the data. From there, the data within the Model could simply be passed to the Controller who then passed it to the View
+to allow it to display to the terminal. 
+
+Furthermore, each class within each package had their own key responsibilities. Some classes were simple data classes, i.e. PartOfCity or CompositeCity, whilst some performed key operations
+on the data, such as Write class or Display Class, all within the Model package. Within the classes, each method did specfically one thing to promote high cohesion. As a result,
+this lead to the methods having distinct responsibilities. For example, within CompositeCity; getTotalPowerConsumption() method only calculates the total power of the tree and returns it.
+The method does not try to do any other operation or provide any other functionality within it!
+
+
+Criterion 3. Appropriate error handling
+
+Due to implementing MVC, it was clear that all error handling should be performed within the Controller. All possible exceptions/errors that could occur while processing data within
+the Model package would be thrown all the way up to the Controller, who then (based on the type of error) was able to create a String with a clear descriptin of the error, 
+which was then passed to the View for displaying to the terminal. Handling all errors within the Controller allowed me to easily debug when errors occurred, as I knew exactly where exceptions
+came from.
+
+
+Criterion 4. Appropriate use of the Strategy Pattern and/or Template Method Pattern
+
+The Strategy Pattern was what I thought was best suitable to address the problem description, which described that there was four options that needed to be performed, i.e. Read, Write, Generate
+and Display. As a result, the program doesn't know what option the user will select or option combinations the user could use. The option "combinations" could mean that I implement the 
+decorator pattern, but due to knowing the scope and limited number of posibilities; to reduce complexity, only the Strategy Pattern was chosen. To do this, I created an IOption interface in which
+all the IOption implementations inherited from. These implementation classes were Read, Write, Generate and Display who all had a doOption() method. These objects were stored in a map and a key,
+which was a command line argument (i.e "-r") was used to search and find the partifular strategy (IOption object) and then its doOption() method was called without knowing what object it is 
+dealing with.
+
+Additionally, this meant validation of command line arguments was a simple task. If the argument could not be found within the map, it meant the user did something wrong!
+
+Criterion 5. Appropriate use of the Composite Pattern
+
+The Composite Pattern was very clear on where it had to be implemented. The problem description stated a tree network that could consist of "Leaf" nodes or "subdisions". I understood "subdivision"
+as a keyword hinting to the Composite node. Consequently, I created ICity; an interface which was the "node". The leaf object which implemented the ICity interface was PartOfCity, i.e. the 
+lowest subdivision of the city, and created a composite node as CompositeCity which also implemented ICity, but simultaneously could have many ICity objects stored within it, i.e. its subdivisions.
+Within the CompositeCity, it could store in its class field list its own children. These children could be more subdivisions (CompositeCity objects) who in turn could have more children of their 
+own, or it could simply be a leaf node (PartOfCity Objects). As a result, I could easily store the data within these two classes and build a tree read by using CompositeCity object's children and
+very easily iterate through when needed.
+
+
+Criterion 6. Clear and correct UML.
+
+Based on my program, I created a UML to illustrate its design. I used dotted boxes to indicate what was in a "package", i.e the Model package, Controller Packager and View Package. Furthermore, 
+within those packages, I put more dotted boxes around classes and interfaces to group them, illustrating the particular software design pattern they were implementing; in case it was not
+clear to the reader. Finally, to make the UML easier to read, I added some colour coding to help identify where lines where coming from and going to.

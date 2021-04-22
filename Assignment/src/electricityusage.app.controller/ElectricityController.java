@@ -23,18 +23,6 @@ public class ElectricityController
          this.view = v;
      }
 
-     /*public void run()
-     {
-        try
-        {
-
-        }
-        catch(IllegalArgumentException e)
-        {
-            view.displayError(e.getMessage());
-        }
-     }*/
-
      public void doFirstOption()
      {
          try
@@ -52,10 +40,6 @@ public class ElectricityController
             view.displayError(e.getMessage());
             System.exit(0);
         }
-        /*catch(FileNotFoundException e)
-        {
-            view.displayError(e.getMessage());
-        }*/
      }
 
      public void doSecondOption()

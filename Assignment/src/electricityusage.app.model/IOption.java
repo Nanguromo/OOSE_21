@@ -12,5 +12,4 @@ public interface IOption
 
     public CompositeCity getCity();
 
-    //public void findComposite(IOption, String);
 }

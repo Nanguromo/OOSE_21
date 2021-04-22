@@ -24,14 +24,4 @@ public class ElectricityView
     {
         System.out.println(str);
     }
-    /*public boolean checkReadWriteValid()//checks if read and write filenames are unique
-    {
-        boolean valid = true;
-        if(option1.getFilename().equals(option2.getFilename()))
-        {
-            valid = false;
-        }
-        return valid;
-    }*/
-
 }
