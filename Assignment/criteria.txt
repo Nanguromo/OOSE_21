@@ -55,5 +55,5 @@ very easily iterate through when needed.
 Criterion 6. Clear and correct UML.
 
 Based on my program, I created a UML to illustrate its design. I used dotted boxes to indicate what was in a "package", i.e the Model package, Controller Packager and View Package. Furthermore, 
-within those packages, I put more dotted boxes around classes and interfaces to group them, illustrating the particular software design pattern they were implementing; in case it was not
+within those packages, I put boxes around classes and interfaces to group them, illustrating the particular software design pattern they were implementing; in case it was not
 clear to the reader. Finally, to make the UML easier to read, I added some colour coding to help identify where lines where coming from and going to.
