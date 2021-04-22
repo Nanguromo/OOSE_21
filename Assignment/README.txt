@@ -11,7 +11,7 @@ How to compile and run:
     - type "ant" to compile
     - change to the "dist" directory with "cd dist/"
     - Within "dist" should be a simple example file "read.txt" that you can use later to read, or supply your own
-    - To run, within "dist" directory, type "java -jar ElectricityUsageApp [args...]
+    - To run, within "dist" directory, type "java -jar ElectricityUsage [args...]
         - argument 1 can be "-r" to read from a file provided as an argument following OR "-g" to generate a data. You can only enter one option
         - argument 2 can be "-w" to write to a file provided as an argument folllowing OR "-d" to display data that was either generated or read, to the terminal
             - You cannot enter the same argument twice, it will be an error!
@@ -21,15 +21,15 @@ How to compile and run:
         - Note: You can simply make a writefile by entering a name. If it is not found in the directory, the file will be created. Furthermore, if the found exists, it will APPEND to it!
 
 Examples:
-    - "java -jar ElectricityUsageApp -r myreadfile.txt -w mywritefile.csv"
+    - "java -jar ElectricityUsage -r myreadfile.txt -w mywritefile.csv"
         - reads from myreadfile.txt and creates it tree internally, before writing the tree to mywritefile.csv 
-    - "java -jar ElectricityUsageApp -g -w mywritefile.txt"
+    - "java -jar ElectricityUsage -g -w mywritefile.txt"
         - generates a tree internally and writes it to mywritefile.txt
-    - "java -jar ElectricityUsageApp -g -d"
+    - "java -jar ElectricityUsage -g -d"
         - gennerates a tree interally and displays it to the terminal
 
     Bad example:
-        - "java -jar ElectricityUsageApp -g -r mywritefile.txt"
+        - "java -jar ElectricityUsage -g -r mywritefile.txt"
             - you cannot read AND generate. Similarly you cannot write AND display. Doing this will always result in an error! 
 
     
