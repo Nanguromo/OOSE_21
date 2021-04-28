@@ -6,16 +6,24 @@ import java.util.*;
 public class ReminderList
 {
     private List<Reminder> reminders;
+    private List<ReminderObserver> obs;
 
     public ReminderList()
     {
         reminders = new ArrayList<Reminder>();
+        obs = new ArrayList<ReminderObserver>();
     }
     
     /** Add a single reminder to the list. */
     public void addReminder(Reminder rem)
     {
         reminders.add(rem);
+    }
+
+    /** Add an observer to the observer list */
+    public void addObserver(ReminderObserver ob)
+    {
+        obs.add(ob);
     }
     
     /** Add a complete list of reminders to the existing list. */
@@ -34,5 +42,14 @@ public class ReminderList
     public List<Reminder> getReminders()
     {
         return Collections.unmodifiableList(reminders);
+    }
+
+    /** Notify observers in observer list */
+    public void notifyReminders()
+    {
+        for(ReminderObserver remObs: obs)
+        {
+            remObs.updateReminder();
+        }
     }
 }

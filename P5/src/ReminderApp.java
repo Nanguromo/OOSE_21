@@ -18,12 +18,19 @@ public class ReminderApp
                 public void run() 
                 {   
                     // Create a window (hidden to begin with)
-                    MainWindow window = new MainWindow(controller);
+                    //Controller.MainWindow window = new Controller.MainWindow();
                                         
                     // Exit when the exit button is pressed.
-                    window.setVisible(true);
+                    //window.setVisible(true);
+                    controller.setVisible(true);
+                    //controller.write();
+
                 }
             }
         );
+        /*controller.test();
+        controller.write();
+        controller.test();*/
+
     }
 }
