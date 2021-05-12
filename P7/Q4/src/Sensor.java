@@ -14,7 +14,8 @@ public class Sensor
             @Override
             public void run()
             {
-                airlock.updatePressure(airlock.getPressure());
+                airlock.updatePressure(airlock.getPressure()); //Print out the current pressure within the SpaceStation every second
+                //if the Pump is extracting or returning air, it will print out the changing air pressure as it extracts/returns air
             }
         };
 

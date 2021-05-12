@@ -1,21 +1,23 @@
 import java.util.*;
 
-public class Door
+public abstract class Door
 {
-    private boolean openFlag;
+    protected boolean openFlag; //protected so children can directly use it, but anything else needs to call the getter, isOpen()
 
     public Door()
     {
         openFlag = false;
     }
 
-    public void open()
+    public boolean isOpen()
     {
-        openFlag = true;
+        return openFlag;
     }
 
-    public void close()
-    {
-        openFlag = false;
-    }
+    public abstract void close();
+
+
+    public abstract void open();
+
+    
 }

@@ -16,12 +16,14 @@ public class Pump
 
     public void beginExtraction()
     {
+        System.out.println("The room is depressuring to prevent air wastage.");
+
         TimerTask tt = new TimerTask(){
             @Override
             public void run()
             {
                 pressure = pressure - 1.0;
-                airlock.updatePressure(pressure);       
+                airlock.setPressure(pressure);       
             }
         };
 
@@ -36,12 +38,14 @@ public class Pump
 
     public void beginReturn()
     {
+        System.out.println("The room is pressurising as it currently is not suitable for breathing.");
+
         TimerTask tt = new TimerTask(){
             @Override
             public void run()
             {
                 pressure = pressure + 1.0;
-                airlock.updatePressure(pressure);       
+                airlock.setPressure(pressure);       
             }
         };
 
