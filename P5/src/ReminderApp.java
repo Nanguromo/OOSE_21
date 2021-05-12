@@ -2,7 +2,7 @@ import javax.swing.*;
 
 /**
  * A reminder application.
- * @author Dave
+ * @author Dave & Wayne
  */
 public class ReminderApp 
 {

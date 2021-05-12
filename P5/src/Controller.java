@@ -175,6 +175,7 @@ public class Controller
                 }
             );
 
+            //When main window close is clicked, write to output file upon exit
             this.addWindowListener( 
                 new WindowAdapter()
                 {
