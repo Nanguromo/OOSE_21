@@ -19,7 +19,7 @@ public class Airlock
         state = 0;
         innerDoor = new Door();
         outerDoor = new Door();
-        pump = new Pump;
+        pump = new Pump();
     }
 
     //Methods
@@ -93,7 +93,7 @@ public class Airlock
                 }
                 break;
             case 2:
-                if(pressure >= 5) // Wasting air. Depressurise more
+                if(currPressure >= 5) // Wasting air. Depressurise more
                 {
                     depressurise();
                 }
