@@ -3,18 +3,18 @@ import java.util.*;
 public class Sensor 
 {
     private double pressure;
-    private Airlock airlock;
+    private SpaceStation ss;
 
     
-    public Sensor(Airlock al)
+    public Sensor(SpaceStation ss)
     {
         pressure = 101.3;
-        airlock = al;
+        this.ss = ss;
         TimerTask tt = new TimerTask(){
             @Override
             public void run()
             {
-                airlock.updatePressure(airlock.getPressure()); //Print out the current pressure within the SpaceStation every second
+                ss.updatePressure(ss.getPressure()); //Print out the current pressure within the SpaceStation every second
                 //if the Pump is extracting or returning air, it will print out the changing air pressure as it extracts/returns air
             }
         };

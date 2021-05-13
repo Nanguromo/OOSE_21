@@ -1,4 +1,4 @@
-import java.util.Map;
+import java.util.*;
 
 public class SpaceStation
 {
@@ -13,7 +13,7 @@ public class SpaceStation
     private IState currState;
     private Map<Integer, IState> states;// Key correspondence: 1-> Idle, 2-> InsideAirlock, 3-> Space
     private Pump pump;
-
+    private Sensor sensor;
 
     // constructor(s)
     public SpaceStation()
@@ -22,8 +22,8 @@ public class SpaceStation
 
         innerDoorStatus = true;
         outerDoorStatus = true;
-        innerDoor = new InsideDoor();
-        outerDoor = new OutsideDoor();
+        innerDoor = new InnerDoor();
+        outerDoor = new OuterDoor();
 
         states = new HashMap<Integer, IState>();
         states.put(1, new Idle(this));
@@ -33,6 +33,8 @@ public class SpaceStation
         currState = states.get(1); // initial state is idle, i.e. within the Space Station HQ.
 
         pump = new Pump(this);
+        sensor = new Sensor(this);
+        
     }
 
     //Methods
@@ -52,13 +54,12 @@ public class SpaceStation
 
     public void openInnerDoor()
     {
-
+        currState.openInnerDoor();
     }
 
     public void openOuterDoor()
     {
-      
-
+      currState.openOuterDoor();
     }
 
     //Used by Sensor to update and print in current pressure every second.
@@ -86,6 +87,11 @@ public class SpaceStation
     {
         return outerDoor.isOpen();
     }
+
+    /*public IState getKey(int key)
+    {
+        return states.get(key);
+    }*/
 
     public void closeOuterDoor()
     {
