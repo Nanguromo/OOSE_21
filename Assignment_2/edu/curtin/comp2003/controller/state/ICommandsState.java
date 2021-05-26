@@ -1,4 +1,4 @@
-package edu.curtin.comp2003.controller;
+package edu.curtin.comp2003.controller.state;
 
 //By creating a command state, this ensures that the command constraints specified in Section "4.1 Commands from Earth" are satisfied without using any if/else/cases.
 //Each command function can can only called if-and-only-if the rover is in its corresponding state

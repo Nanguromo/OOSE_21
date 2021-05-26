@@ -1,4 +1,4 @@
-package edu.curtin.comp2003.controller;
+package edu.curtin.comp2003.controller.state;
 
 import edu.curtin.comp2003.rover.SoilAnalyser;
 import edu.curtin.comp2003.rover.Sensors;
