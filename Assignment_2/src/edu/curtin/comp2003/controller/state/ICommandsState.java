@@ -9,9 +9,13 @@ public interface ICommandsState
 
     public void turn(double angle);// T
     
-    public byte[] takePhoto();// P
+    /**
+     * 
+     * Encodes a Byte[] to a String using the Base64 encoding scheme
+     */
+    public void takePhoto();// P
     
-    public Environment getEnvironmentalStatus(); // E. Environment is a simple data class holding temperature, visibility and light levels in its class fields
+    public void getEnvironmentalStatus(); // E. Environment is a simple data class holding temperature, visibility and light levels in its class fields
 
     public void startAnalysis(); // S
 

@@ -4,5 +4,5 @@ public class SoilAnalyser
 {
     public void startAnalysis(){}
 
-    public byte[] pollAnalysis(){return new Byte[2];}
+    public byte[] pollAnalysis(){return new byte[2];}
 }
