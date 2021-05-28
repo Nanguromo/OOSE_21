@@ -4,5 +4,5 @@ public class EarthComm
 {
         public String pollCommand(){return "";}
 
-        public void sendMessage(){};
+        public void sendMessage(String s){System.out.println(s);}
 }

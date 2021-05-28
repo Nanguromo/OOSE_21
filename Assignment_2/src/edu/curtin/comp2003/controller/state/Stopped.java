@@ -6,6 +6,7 @@ import edu.curtin.comp2003.rover.EngineSystem;
 import edu.curtin.comp2003.rover.Sensors;
 import edu.curtin.comp2003.rover.SoilAnalyser;
 import edu.curtin.comp2003.controller.EarthHQ;
+import edu.curtin.comp2003.rover.DistanceIncrement;
 
 public class Stopped implements ICommandsState
 {
@@ -27,21 +28,28 @@ public class Stopped implements ICommandsState
     @Override
     public void driveFixedDistance(double distance)
     {
-        es.driveFixedDistance(distance);
-        context.setState(1);//1 corresponds to Driving state on Map <key, value> pair
-        while(distance >= 0.001)
+        //while(Math.abs(distance - (int)distance) < 0.001 )//while 
+        DistanceIncrement di = new DistanceIncrement(distance, es); //Encapsulating class used to change distance while rover travels
+        //without this class, the anonymous new TimerTask() will have errors due to distance changing within it. Hence, to treat it as final, wrap distance
+        //in its own encapsulating task
+        
+        while(di.getCurrDist() >= 0.001)
         {
-            //distance = distance - 0.5; // rover travels at 0.5 metres per 0.1 seconds, i.e. 5 metres per second
-            //INSERT TIMING CODE....
+            //INSERT TIMING CODE....\
+           
             timer.schedule(new TimerTask(){
                 @Override
                 public void run()
                 {
-                    es.driveFixedDistance(distance);
+                    //distance = distance - 0.5; // rover travels at 0.5 metres per 0.1 seconds, i.e. 5 metres per second   
+                    //es.driveFixedDistance(distance);
+
+                    //...INSERT REFERENCE HERE... (STACK OVERFLOW)
+                    di.tick();
                 }
             }, 0, 100);
+            
         }
-        stopDriving();
     }
 
     @Override

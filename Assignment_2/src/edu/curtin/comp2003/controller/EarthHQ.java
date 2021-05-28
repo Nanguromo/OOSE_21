@@ -8,6 +8,7 @@ import edu.curtin.comp2003.rover.SoilAnalyser;
 import edu.curtin.comp2003.rover.EngineSystem;
 import edu.curtin.comp2003.rover.Sensors;
 import edu.curtin.comp2003.controller.state.*;
+import edu.curtin.comp2003.rover.EarthComm;
 
 
 import edu.curtin.comp2003.model.Environment;
@@ -22,11 +23,15 @@ public class EarthHQ
     public EarthHQ()
     {
         // Use factory to inject EngineSystem, Sensors, EarthComm and SoilAnalyser
+
+        //...DEPENDENCY INJECTION TBD...
         EngineSystem engineSystem = new EngineSystem();
         SoilAnalyser soilAnalyser = new SoilAnalyser();
         Sensors sensors = new Sensors();
-        CommandFinished subject = new CommandFinished();
+        EarthComm comms = new EarthComm();
+        CommandFinished subject = new CommandFinished(comms);
         Timer timer = new Timer();
+
 
         state = new Stopped(this, engineSystem, sensors, soilAnalyser, timer); // assume starting state is with the rover stopped and at a standstill
         states = new HashMap<>();

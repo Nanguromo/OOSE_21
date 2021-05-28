@@ -1,15 +1,17 @@
 package edu.curtin.comp2003.controller.observer;
 
 import java.util.*;
-
+import edu.curtin.comp2003.rover.EarthComm;
 
 public class CommandFinished
 {
     private Set<IReturnMessage> observers;
+    private EarthComm comm;
 
-    public CommandFinished()
+    public CommandFinished(EarthComm comm)
     {
         this.observers = new HashSet<>();
+        this.comm = comm;
 
         //The set is filled with anonymous classes. It would be a waste of time and uncessary code (and files) required if I were to make a Concrete class for each Return Message
         //The trade-off for using anonymous classes is that this constructor is quite hefty in size, but it is not convoluted... In my opinion
@@ -20,7 +22,7 @@ public class CommandFinished
             {
                 if(commandFlag.equals("!"))
                 {
-                    System.out.println("! " + message);
+                    comm.sendMessage("! " + message);
                 }
             }
         });
@@ -31,7 +33,7 @@ public class CommandFinished
             {  
                 if(commandFlag.equals("D"))
                 {
-                    System.out.println("D");
+                    comm.sendMessage("D");
                 }
             }
         });
@@ -41,7 +43,7 @@ public class CommandFinished
             {  
                 if(commandFlag.equals("P"))
                 {
-                    System.out.println("P " + message);
+                    comm.sendMessage("P " + message);
                 }
             }
         });
@@ -51,7 +53,7 @@ public class CommandFinished
             {  
                 if(commandFlag.equals("E"))
                 {
-                    System.out.println("E " + message);
+                    comm.sendMessage("E " + message);
                 }
             }
         });
@@ -61,7 +63,7 @@ public class CommandFinished
             {  
                 if(commandFlag.equals("S"))
                 {
-                    System.out.println("S " + message);
+                    comm.sendMessage("S " + message);
                 }
             }
         });
