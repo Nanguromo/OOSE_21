@@ -83,6 +83,6 @@ public class Stopped implements ICommandsState
     @Override
     public void stopDriving()
     {
-        context.notifyObservers("!", "Error: Invalid command. Rover cannot be stopped. It is already at a stand-still");
+        context.notifyObservers("!", "...");//, "Error: Invalid command. Rover cannot be stopped. It is already at a stand-still");
     }
 }

@@ -32,7 +32,7 @@ public class Driving implements ICommandsState
         //without this class, the anonymous new TimerTask() will have errors due to distance changing within it. Hence, to treat it as final, wrap distance
         //in its own encapsulating task
         
-        while(di.getCurrDist() >= 0.001)
+        while(di.getCurrDist() > 0.0)
         {
             //INSERT TIMING CODE....\
            
@@ -47,13 +47,13 @@ public class Driving implements ICommandsState
                     di.tick();
                 }
             }, 0, 100);
-            
+
         }
-        
+        timer.cancel();
+        timer.purge();        
         /*context.setState(3);//3 corresponds to Stopped State, where rover is at a stand-still
         context.notifyObservers("D", "");*/
         stopDriving();
-        //timer.cancel();
     }
 
     @Override
@@ -79,7 +79,7 @@ public class Driving implements ICommandsState
     @Override
     public void startAnalysis()
     {
-        context.notifyObservers("!", "Error: Invalid command. Rover cannot start soil analysis whilst driving");
+        context.notifyObservers("!", "...");//, "Error: Invalid command. Rover cannot start soil analysis whilst driving");
         //throw new IllegalArgumentException("Error: Invalid command. Rover cannot start soil analysis whilst driving");
     }
 

@@ -16,7 +16,7 @@ import edu.curtin.comp2003.model.Environment;
 public class EarthHQ
 {
     private ICommandsState state; //current state
-    private Map<Integer, ICommandsState> states; // map of states. 
+    private Map<Integer, IdCommandsState> states; // map of states. 
     //private Map<String,
     private CommandFinished subject; //Subject for Observer pattern implementation. Used to notify the observers who perform return messages
 
