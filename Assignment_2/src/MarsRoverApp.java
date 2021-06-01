@@ -2,7 +2,7 @@
 import java.util.*;
 
 import edu.curtin.comp2003.controller.EarthHQ;
-
+import edu.curtin.comp2003.rover.*;
 /* Author: Wayne Nanguromo
 Student ID: 19480060
 Created: 26 May, 2021
@@ -11,50 +11,45 @@ public class MarsRoverApp
 {
     public static void main(String[] args)
     {
-        EarthHQ hq = new EarthHQ(); // probably inject EarthHQ's fields here
+        EarthComm comms = new EarthComm();
+        SoilAnalyser sa = new SoilAnalyser();
+        EngineSystem es = new EngineSystem();
+        Sensors sens = new Sensors();
+        //System.out.println(sa);
+        
+        EarthHQ hq = new EarthHQ(es, sa, sens, comms); // probably inject EarthHQ's fields here
+       
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter Commands for Rover:");
-        String input;
+        //System.out.println("Enter Commands for Rover:");
         //...poll everything...
+
+        
         while(true)
         {
-            input = sc.nextLine();
-            String[] split = input.split(" ");
-            if(split.length == 1)
+            String polledCmd = comms.pollCommand();
+            String[] buffer = polledCmd.split("\n");
+
+            if(polledCmd == null)
             {
-                switch(input)
+                comms.sendMessage("! Invalid command received");
+            }
+            else if(buffer.length == 1)//only one command polled
+            {
+                hq.performPolledCmd(polledCmd);
+
+            }
+            /*else if(polledCmd.equals("waiting"))// waiting for next command
+            {
+
+            }*/
+            else//multiple commands polled
+            {
+                for(int i = 0; i < buffer.length; i++)
                 {
-                    case "P":
-                        hq.takePhoto();
-                        break;
-                    case "E":
-                        hq.getEnvironmentalStatus();
-                        break;
-                    case "S":
-                        hq.startAnalysis();
-                        break;
-                    default:
-                        System.out.println("Error: Invalid command!");
+                    hq.performPolledCmd(buffer[i]);
                 }
             }
-            else if(split.length == 2)
-            {
-                switch(split[0])
-                {
-                    case "D":
-                        hq.driveFixedDistance(Double.parseDouble(split[1]));
-                        break;
-                    case "T":
-                        hq.turn(Double.parseDouble(split[1]));
-                        break;
-                    default:
-                        System.out.println("Error: Invalid command!");
-                }
-            }
-            else
-            {
-                System.out.println("Error: Invalid command!");
-            }
+
             try
             {
                 Thread.sleep(500);//sleep for half a second
@@ -63,6 +58,8 @@ public class MarsRoverApp
             {
                 //do something
             }
+            //polledCmd = "waiting";
+            //System.out.println("poll"+polledCmd);
         }
     }
 }

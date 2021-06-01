@@ -83,6 +83,9 @@ public class CommandFinished
     {
         for(IReturnMessage curr: observers)
         {
+            //System.out.println(curr);
+            //System.out.println("here");
+
             curr.commandComplete(commandFlag, message);
         }
     }

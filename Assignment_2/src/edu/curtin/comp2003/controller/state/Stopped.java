@@ -76,8 +76,16 @@ public class Stopped implements ICommandsState
     @Override
     public void startAnalysis()
     {
+        //System.out.println((soilAnalyser));   
         soilAnalyser.startAnalysis();
-        context.setState(2); //2 corresponds to SoilAnalysisState on Map <key, value> pair
+        context.setState(2);//the driver is stopped, but its current state is now SoilAnalysis state as it is performing a soil analysis
+
+        //the rover now knows it cannot drive or perform any commands that are restricted by the soil analysis state
+
+        context.setState(3); //3 corresponds to Stopped on Map <key, value> pair
+        //set state back to stopped, when soil analysis is finished
+        context.notifyObservers("S", "");
+        //once soil analysis is complete, the rover is back in a stopped state.
     }
 
     @Override
