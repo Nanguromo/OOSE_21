@@ -37,8 +37,11 @@ public class SoilAnalyser
 
             }
         }
-        System.out.println("\nSoil Analysis Complete.");
+        //System.out.println("\nSoil Analysis Complete.");
     }
 
-    public byte[] pollAnalysis(){return new byte[2];}
+    public byte[] pollAnalysis()
+    {
+        return new byte[2];
+    }
 }

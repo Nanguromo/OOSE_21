@@ -22,7 +22,7 @@ public class Stopped implements ICommandsState
         this.es = es;
         this.sensors = sensors;
         this.soilAnalyser = soilAnalyser;
-        this.timer = timer;
+        this.timer = timer;// new Timer();
     }
 
     @Override
@@ -33,23 +33,49 @@ public class Stopped implements ICommandsState
         //without this class, the anonymous new TimerTask() will have errors due to distance changing within it. Hence, to treat it as final, wrap distance
         //in its own encapsulating task
         
-        while(di.getCurrDist() >= 0.001)
+        //while(!(di.getCurrDist() < 0.0) && di.getFlag())
+        while(di.getFlag())
         {
             //INSERT TIMING CODE....\
            
-            timer.schedule(new TimerTask(){
+            /*timer.schedule(new TimerTask(){
                 @Override
                 public void run()
                 {
-                    //distance = distance - 0.5; // rover travels at 0.5 metres per 0.1 seconds, i.e. 5 metres per second   
+                    //distance = distance - 0.5; // rover travels at 0.5 metres per 0.5 seconds 
                     //es.driveFixedDistance(distance);
 
                     //...INSERT REFERENCE HERE... (STACK OVERFLOW)
                     di.tick();
                 }
-            }, 0, 100);
-            
+            }, 0, 1000);*/
+            //System.out.println(di.getCurrDist());
+
+            es.driveFixedDistance(distance);
+            di.tick();
+            try
+            {
+                Thread.sleep(100);
+            }
+            catch(InterruptedException e)
+            {
+                
+            }
         }
+
+        /*try
+        {
+            //timer.cancel();
+            //timer.purge();
+        }
+        catch(IllegalStateException e)
+        {
+
+        }
+
+        System.out.println("here reached");*/
+        context.notifyObservers("D", "");
+
     }
 
     @Override
@@ -88,9 +114,10 @@ public class Stopped implements ICommandsState
         //once soil analysis is complete, the rover is back in a stopped state.
     }
 
+    //this does not need to be here
     @Override
     public void stopDriving()
     {
-        context.notifyObservers("!", "...");//, "Error: Invalid command. Rover cannot be stopped. It is already at a stand-still");
+        context.notifyObservers("!", "Error: Invalid command. Rover cannot be stopped. It is already at a stand-still");
     }
 }

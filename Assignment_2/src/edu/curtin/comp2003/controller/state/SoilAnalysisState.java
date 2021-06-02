@@ -17,20 +17,20 @@ public class SoilAnalysisState implements ICommandsState
         this.context = context;
         this.sensors = sensors;
         this.soilAnalyser = soilAnalyser;
-        this.timer = timer;
+        this.timer = timer;//new Timer();
     }
 
     @Override
     public void driveFixedDistance(double distance)
     {
-        context.notifyObservers("!", " ...");//, "Error: Invalid command. Rover cannot drive whilst performing soil analysis");
+        context.notifyObservers("!", "Error: Invalid command. Rover cannot drive whilst performing soil analysis");
         //throw new IllegalArgumentException("Error: Invalid command. Rover cannot drive whilst performing soil analysis");
     }
 
     @Override
     public void turn(double angle)
     {
-        context.notifyObservers("!", " ...");// "Error: Invalid command. Rover cannot turn whilst performing soil analysis");
+        context.notifyObservers("!", "Error: Invalid command. Rover cannot turn whilst performing soil analysis");
         //throw new IllegalArgumentException("Error: Invalid command. Rover cannot turn whilst performing soil analysis");
     }
 
@@ -52,13 +52,13 @@ public class SoilAnalysisState implements ICommandsState
     @Override
     public void startAnalysis()
     {
-        context.notifyObservers("!", " ...");//, "Error: Invalid command. Rover cannot start another soil analysis whilst still performing a soil analysis");
+        context.notifyObservers("!", "Error: Invalid command. Rover cannot start another soil analysis whilst still performing a soil analysis");
         //throw new IllegalArgumentException("Error: Invalid command. Rover cannot start another soil analysis whilst still performing a soil analysis");
     }
 
     @Override
     public void stopDriving()
     {
-        context.notifyObservers("!", " ...");// "Error: Invalid command. Rover cannot be stopped. It is already at a stand-still, whilst performing a soil analysis");
+        context.notifyObservers("!", "Error: Invalid command. Rover cannot be stopped. It is already at a stand-still, whilst performing a soil analysis");
     }
 }

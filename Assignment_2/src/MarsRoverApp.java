@@ -7,7 +7,7 @@ import edu.curtin.comp2003.rover.*;
 Student ID: 19480060
 Created: 26 May, 2021
 */
-public class MarsRoverApp
+public class MarsRoverApp 
 {
     public static void main(String[] args)
     {
@@ -28,6 +28,10 @@ public class MarsRoverApp
         {
             String polledCmd = comms.pollCommand();
             String[] buffer = polledCmd.split("\n");
+
+            //Thread one received polled commands.
+
+            //Thread two executes polled commands.
 
             if(polledCmd == null)
             {
