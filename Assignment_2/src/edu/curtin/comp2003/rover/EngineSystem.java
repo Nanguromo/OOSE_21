@@ -6,7 +6,11 @@ public class EngineSystem
 
     public void stopDriving(){}
 
-    public void turn(double angle){}
+    public void turn(double angle)
+    {
+        //stub code
+        System.out.println("Rover turned " + angle + " degrees");
+    }
 
     public double getDistanceDriven(){return 0.0;}
 

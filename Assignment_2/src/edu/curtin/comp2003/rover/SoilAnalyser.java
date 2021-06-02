@@ -37,6 +37,7 @@ public class SoilAnalyser
 
             }
         }
+        System.out.println("");
         //System.out.println("\nSoil Analysis Complete.");
     }
 

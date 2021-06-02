@@ -4,7 +4,7 @@ public class EarthComm
 {
         public String pollCommand()
         {
-                String cmd = "S\nP\nD\nD 76.3";
+                String cmd = "S\nP\nD\nD 23.1\nT 75.5\nE";
 
                 return cmd;
         }

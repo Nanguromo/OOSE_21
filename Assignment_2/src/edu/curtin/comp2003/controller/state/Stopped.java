@@ -32,50 +32,26 @@ public class Stopped implements ICommandsState
         DistanceIncrement di = new DistanceIncrement(distance, es); //Encapsulating class used to change distance while rover travels
         //without this class, the anonymous new TimerTask() will have errors due to distance changing within it. Hence, to treat it as final, wrap distance
         //in its own encapsulating task
-        
+        context.setState(1);//set state to 1 which is the Driving state.
+
         //while(!(di.getCurrDist() < 0.0) && di.getFlag())
         while(di.getFlag())
         {
-            //INSERT TIMING CODE....\
-           
-            /*timer.schedule(new TimerTask(){
-                @Override
-                public void run()
-                {
-                    //distance = distance - 0.5; // rover travels at 0.5 metres per 0.5 seconds 
-                    //es.driveFixedDistance(distance);
-
-                    //...INSERT REFERENCE HERE... (STACK OVERFLOW)
-                    di.tick();
-                }
-            }, 0, 1000);*/
-            //System.out.println(di.getCurrDist());
-
+            //INSERT TIMING CODE
             es.driveFixedDistance(distance);
             di.tick();
             try
             {
-                Thread.sleep(100);
+                Thread.sleep(50);
             }
             catch(InterruptedException e)
             {
-                
+
             }
         }
-
-        /*try
-        {
-            //timer.cancel();
-            //timer.purge();
-        }
-        catch(IllegalStateException e)
-        {
-
-        }
-
-        System.out.println("here reached");*/
-        context.notifyObservers("D", "");
-
+        context.notifyObservers("D", "");//Let observers know that rover has finished driving
+        context.setState(3); //set the state back to 3 (Stopped) as the rover has finished driving and has reached its destination
+        
     }
 
     @Override

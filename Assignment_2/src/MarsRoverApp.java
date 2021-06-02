@@ -15,55 +15,60 @@ public class MarsRoverApp
         SoilAnalyser sa = new SoilAnalyser();
         EngineSystem es = new EngineSystem();
         Sensors sens = new Sensors();
-        //System.out.println(sa);
-        
+
+        PollingThread t1 = new PollingThread(comms);
         EarthHQ hq = new EarthHQ(es, sa, sens, comms); // probably inject EarthHQ's fields here
-       
-        Scanner sc = new Scanner(System.in);
-        //System.out.println("Enter Commands for Rover:");
+        //Multithread t2;
+       // Multithread t3;
+
         //...poll everything...
 
         
         while(true)
         {
-            String polledCmd = comms.pollCommand();
-            String[] buffer = polledCmd.split("\n");
+            /*String polledCmd = comms.pollCommand();
+            String[] buffer = polledCmd.split("\n");*/
 
             //Thread one received polled commands.
+            t1.start();
 
             //Thread two executes polled commands.
 
-            if(polledCmd == null)
+            //if(polledCmd == null)
+            if(t1.getPolledCmd() == null)
             {
                 comms.sendMessage("! Invalid command received");
             }
-            else if(buffer.length == 1)//only one command polled
+            else if(t1.getBufferLength() == 1)
+            //else if(buffer.length == 1)//only one command polled
             {
-                hq.performPolledCmd(polledCmd);
-
+                hq.performPolledCmd(t1.getPolledCmd());
+                //t2 = new Multithread(comms, hq, t1.getPolledCmd());
+                //t3 = new Multithread(comms, hq);
+                //t2.setCmd(t1.getPolledCmd());
+                //t2.start();
+                //t2.stop();
             }
-            /*else if(polledCmd.equals("waiting"))// waiting for next command
-            {
-
-            }*/
             else//multiple commands polled
             {
-                for(int i = 0; i < buffer.length; i++)
+                for(int i = 0; i < t1.getBufferLength(); i++)
                 {
-                    hq.performPolledCmd(buffer[i]);
+                    hq.performPolledCmd(t1.getBufferElement(i));
+
+                    //t3.setCmd(t1.getBufferElement(i));
+                    //t3 = new Multithread(comms, hq, t1.getBufferElement(i));
+                    //t3.start();
                 }
             }
 
             try
             {
-                Thread.sleep(500);//sleep for half a second
+                Thread.sleep(3000);//sleep for three seconds
             }
             catch(InterruptedException e)
             {
                 //do something
             }
-            //polledCmd = "waiting";
-            //System.out.println("poll"+polledCmd);
         }
     }
 }

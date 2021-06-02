@@ -27,32 +27,27 @@ public class Driving implements ICommandsState
     @Override
     public void driveFixedDistance(double distance)
     {
-        //while(Math.abs(distance - (int)distance) < 0.001 )//while 
         DistanceIncrement di = new DistanceIncrement(distance, es); //Encapsulating class used to change distance while rover travels
         //without this class, the anonymous new TimerTask() will have errors due to distance changing within it. Hence, to treat it as final, wrap distance
         //in its own encapsulating task
         
+        //DO NOT have to set the state to "driving" state as this class is already the driving state.
         while(di.getFlag())
         {
-            //INSERT TIMING CODE....\
-           
-            timer.schedule(new TimerTask(){
-                @Override
-                public void run()
-                {
-                    //distance = distance - 0.5; // rover travels at 0.5 metres per 0.1 seconds, i.e. 5 metres per second   
-                    //es.driveFixedDistance(distance);
+            es.driveFixedDistance(distance);
+            di.tick();
+            try
+            {
+                Thread.sleep(50);
+            }
+            catch(InterruptedException e)
+            {
 
-                    //...INSERT REFERENCE HERE... (STACK OVERFLOW)
-                    di.tick();
-                }
-            }, 0, 500);
-
+            }
         }
-        /*timer.cancel();
-        timer.purge();   */     
-        /*context.setState(3);//3 corresponds to Stopped State, where rover is at a stand-still*/
-        context.notifyObservers("D", "");
+
+        context.notifyObservers("D", "");//notify obsevers that rover has finished driving
+        context.setState(3); //set the state back to 3 (Stopped) as the rover has finished driving and has reached its destination
 
     }
 

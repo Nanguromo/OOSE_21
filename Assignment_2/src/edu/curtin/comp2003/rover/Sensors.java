@@ -8,5 +8,17 @@ public class Sensors
 
     public double readLightLevel(){return 0.0;}
 
-    public byte[] takePhoto(){return new byte[2];}
+    public byte[] takePhoto()
+    {
+        //STUB CODE
+        //Random size of bytes to simulate different photos taken
+        int res = (int)(Math.random()*10);
+        while(res == 0)//ensure pseudo-random number is never 0
+        {
+            res = (int)(Math.random()*10);
+            //System.out.println(res);
+        }
+
+        return new byte[res];
+    }
 }
