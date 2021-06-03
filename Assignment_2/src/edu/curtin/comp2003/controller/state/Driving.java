@@ -13,14 +13,12 @@ public class Driving implements ICommandsState
     private EarthHQ context;
     private EngineSystem es;
     private Sensors sensors;
-    private Timer timer;
 
-    public Driving(EarthHQ context, EngineSystem es, Sensors sensors, Timer timer)
+    public Driving(EarthHQ context, EngineSystem es, Sensors sensors)
     {
         this.context = context;
         this.es = es;
         this.sensors = sensors;
-        this.timer = timer;//   new Timer();
     }
 
 
@@ -75,7 +73,6 @@ public class Driving implements ICommandsState
     public void startAnalysis()
     {
         context.notifyObservers("!", "Error: Invalid command. Rover cannot start soil analysis whilst driving");
-        //throw new IllegalArgumentException("Error: Invalid command. Rover cannot start soil analysis whilst driving");
     }
 
     @Override

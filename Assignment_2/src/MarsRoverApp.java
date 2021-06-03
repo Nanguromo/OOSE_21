@@ -2,6 +2,7 @@
 import java.util.*;
 
 import edu.curtin.comp2003.controller.EarthHQ;
+import edu.curtin.comp2003.controller.observer.CommandFinished;
 import edu.curtin.comp2003.rover.*;
 /* Author: Wayne Nanguromo
 Student ID: 19480060
@@ -15,11 +16,10 @@ public class MarsRoverApp
         SoilAnalyser sa = new SoilAnalyser();
         EngineSystem es = new EngineSystem();
         Sensors sens = new Sensors();
+        CommandFinished commFin = new CommandFinished(comms);
 
         PollingThread t1 = new PollingThread(comms);
-        EarthHQ hq = new EarthHQ(es, sa, sens, comms); // probably inject EarthHQ's fields here
-        //Multithread t2;
-       // Multithread t3;
+        EarthHQ hq = new EarthHQ(es, sa, sens, comms, commFin); // probably inject EarthHQ's fields here
 
         //...poll everything...
 
@@ -32,7 +32,8 @@ public class MarsRoverApp
             //Thread one received polled commands.
             t1.start();
 
-            //Thread two executes polled commands.
+            hq.start();/*this thread will always check the environment visibility level and return the environment
+            conditions if the visibility crosses below 4km or rises above 5km.*/
 
             //if(polledCmd == null)
             if(t1.getPolledCmd() == null)
@@ -60,7 +61,6 @@ public class MarsRoverApp
                     //t3.start();
                 }
             }
-
             try
             {
                 Thread.sleep(3000);//sleep for three seconds

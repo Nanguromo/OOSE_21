@@ -10,28 +10,24 @@ public class SoilAnalysisState implements ICommandsState
     private EarthHQ context;
     private SoilAnalyser soilAnalyser;
     private Sensors sensors;
-    private Timer timer;
 
-    public SoilAnalysisState(EarthHQ context, Sensors sensors, SoilAnalyser soilAnalyser, Timer timer)
+    public SoilAnalysisState(EarthHQ context, Sensors sensors, SoilAnalyser soilAnalyser)
     {
         this.context = context;
         this.sensors = sensors;
         this.soilAnalyser = soilAnalyser;
-        this.timer = timer;//new Timer();
     }
 
     @Override
     public void driveFixedDistance(double distance)
     {
         context.notifyObservers("!", "Error: Invalid command. Rover cannot drive whilst performing soil analysis");
-        //throw new IllegalArgumentException("Error: Invalid command. Rover cannot drive whilst performing soil analysis");
     }
 
     @Override
     public void turn(double angle)
     {
         context.notifyObservers("!", "Error: Invalid command. Rover cannot turn whilst performing soil analysis");
-        //throw new IllegalArgumentException("Error: Invalid command. Rover cannot turn whilst performing soil analysis");
     }
 
     @Override
@@ -53,7 +49,6 @@ public class SoilAnalysisState implements ICommandsState
     public void startAnalysis()
     {
         context.notifyObservers("!", "Error: Invalid command. Rover cannot start another soil analysis whilst still performing a soil analysis");
-        //throw new IllegalArgumentException("Error: Invalid command. Rover cannot start another soil analysis whilst still performing a soil analysis");
     }
 
     @Override

@@ -14,27 +14,23 @@ public class Stopped implements ICommandsState
     private Sensors sensors;
     private EngineSystem es;
     private SoilAnalyser soilAnalyser;
-    private Timer timer;
 
-    public Stopped(EarthHQ context, EngineSystem es, Sensors sensors, SoilAnalyser soilAnalyser, Timer timer)
+    public Stopped(EarthHQ context, EngineSystem es, Sensors sensors, SoilAnalyser soilAnalyser)
     {
         this.context = context;
         this.es = es;
         this.sensors = sensors;
         this.soilAnalyser = soilAnalyser;
-        this.timer = timer;// new Timer();
     }
 
     @Override
     public void driveFixedDistance(double distance)
     {
-        //while(Math.abs(distance - (int)distance) < 0.001 )//while 
         DistanceIncrement di = new DistanceIncrement(distance, es); //Encapsulating class used to change distance while rover travels
         //without this class, the anonymous new TimerTask() will have errors due to distance changing within it. Hence, to treat it as final, wrap distance
         //in its own encapsulating task
         context.setState(1);//set state to 1 which is the Driving state.
 
-        //while(!(di.getCurrDist() < 0.0) && di.getFlag())
         while(di.getFlag())
         {
             //INSERT TIMING CODE
@@ -86,7 +82,9 @@ public class Stopped implements ICommandsState
 
         context.setState(3); //3 corresponds to Stopped on Map <key, value> pair
         //set state back to stopped, when soil analysis is finished
-        context.notifyObservers("S", "");
+        String msg = Base64.getEncoder().encodeToString(soilAnalyser.pollAnalysis()); //encodes a Byte[] sent from sensors on the rover
+
+        context.notifyObservers("S", msg);
         //once soil analysis is complete, the rover is back in a stopped state.
     }
 
