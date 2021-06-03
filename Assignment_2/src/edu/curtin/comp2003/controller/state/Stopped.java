@@ -8,6 +8,9 @@ import edu.curtin.comp2003.rover.SoilAnalyser;
 import edu.curtin.comp2003.controller.EarthHQ;
 import edu.curtin.comp2003.controller.DistanceIncrement;
 
+/**
+ * The rover is stopped. This was an obvious choice for one of the rover's possible states.
+ */
 public class Stopped implements ICommandsState
 {
     private EarthHQ context;

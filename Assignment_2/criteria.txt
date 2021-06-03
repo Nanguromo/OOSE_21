@@ -1,0 +1,56 @@
+1. Clear and distinct package/class/interface/method responsibilities.
+
+It was made clear in the problem description that MVC is not a good idea and simply would not make sense (NO GUI). Consequently,
+I based my packaging from the Rover API given by Dr Cooper. From there, I added my own package; Controller. Controller was necessarry
+because something needed to control the rover's actions and determine whether a command was valid, or to return a command update back to 
+Earth, etc. Within the Controller package, I had a State package which consisted of all the State Pattern implementation files, and also
+an Observer package which consisted of all the Observer Pattern implementation files. This created clear responsibilities for the system
+and also allowed the software to be designed in steps, having different parts isolated from each other, until they needed to interact.
+
+2. Appropriate error handling.
+
+In my implementation there was no error handling. Any "error" would be created by the scientists on Earth giving faulty commands, hence,
+this error would be treated as a "! ..." message sent back to Earth. The only real error handling done, was for the Java API objects, such as
+Thread, which needed to have Interrupted Exception caught. It did not make sense to throw this up to the controller or main class, so instead,
+whenever Thread.sleep() was called, it was simlpy dealt with in its respective class.
+
+3. Implementation of dependency injection.
+
+In my design, I felt the need for a Factory was unecessary. Consequently, to adhere to dependenction principles, all Class Objects created
+was done in the main class, MarsRoverApp, and injected into where it was need. This allowed, easy debugging and tracking off object errors
+as it would be easier to tell where errors for these classes were coming from. Furthermore, no singletons were used as it was recommended by
+the problem statement. Despite this, the Rover API Objects act similar to a singleton as they only have one instance allowed, but this is done
+to maintain data easier, and due to the fact it would not make sense to have multiple objects of the Rover API classes in the first place. i.e.
+Why would multiple EngineSystem objects be needed? There is only one Rover.
+
+4. Use of polymorphism #1
+
+My first use of polymorphism was the State Pattern. It was very clear that the Rover had certain commands it could only perform depending on 
+whether it was Driving, Stopped or perfomring a Soil Analysis. Consequently, this made it clear that the States I needed was (1)Driving, (2) Stopped,
+and (3)SoilAnalysisState. Once this was evident, all I had to do was create these three states in accordance with the State Pattern. Within these
+three states, only commands that were valid for the respective state would be implemented, otherwise it would send an invalid command error back to
+Earth. This was quite elegant, as it completely removed the need of significant if-else and case-switch statements, if I were to implement a similar
+solution to the system requirements, WITHOUT the State Pattern. Additionally, this gave me great appreciation for the beauty behind software engineering
+principles and how complex systems can be made with simple code with the assistance of Software Design Patterns, albeit my code is not the most refined.
+
+5. Use of polymorphism #2
+
+Initially it was quite a struggle thinking of what other polymorphic inheritance hierarchy I could implement that would ASSIST with meeting the system
+requirements of this problem. It was only until I realised that, I could use my controller class to service as both the "Context" for the State Pattern, but
+could simultaneously use it to serve as the "Subject" for the Observer pattern. Furthermore, this made great sense to me, because the controller is suppose
+to be the "brains" behind the program. Consequently, the second polymorphism design choice was The Observer Pattern. This made sense to use in the design because
+the majority of the methods within the system were void and did not really care what happens when called. Therefore, my I used The Observer Pattern to alert the 
+Observers (different return messages) when a command received from the rover was COMPLETE. Upon completetion of a command, notifyObserver() is called which passes
+a String, corresponding to different return messages,i.e. "D" or "S". This String acted as a flag, and if the flag matched the internal class field flag of an Observer,
+the Observer would send its flag to Earth, letting the scientists on Earth know a command was successfully complete, or invalid (! ...).
+
+6. Clear and correct UML
+
+My UML was constructed to illustrate the software system that I created. To analyse it critically, I believe my design could still be improved significantly. This was
+evident by seeing the amount of lines illustrating the different inheritance hierarchies. Aside from demonstrating a complex inheritance hierarchu, I think it also suggests 
+that If I were to do this assignment in the future; it means I need to refactor my design to de-couple it further.
+
+7. Bonus: Generics
+
+Due to time constraints I did not refactor my code to integrate generics. Despite this, I struggled to see where generics would actually aid to my design in meeting the
+system requirements.

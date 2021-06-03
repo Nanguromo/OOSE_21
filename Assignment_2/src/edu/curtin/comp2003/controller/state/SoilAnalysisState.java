@@ -5,6 +5,10 @@ import edu.curtin.comp2003.rover.Sensors;
 import edu.curtin.comp2003.controller.EarthHQ;
 import java.util.*;
 
+/**
+ * Rover is performing soil analysis. This was harder to determine if it should be a state, but it makes sense,
+ * as the rover can only perform certain actions whilst doing soil analysis. Consequently, it was made a state.
+ */
 public class SoilAnalysisState implements ICommandsState
 { 
     private EarthHQ context;

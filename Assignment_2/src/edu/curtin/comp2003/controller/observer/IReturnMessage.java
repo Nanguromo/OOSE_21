@@ -1,7 +1,7 @@
 package edu.curtin.comp2003.controller.observer;
 
 /**
- * Observer Interface. Used to implement Section 4.2 - Return Messages
+ * Interface used to implement The Observer Pattern to solve Section 4.2 - Return Messages
  */
 public interface IReturnMessage
 {

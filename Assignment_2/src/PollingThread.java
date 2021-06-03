@@ -1,8 +1,11 @@
-//PUT INTO PROPER PACKAGES  
 import java.util.*;
 
 import edu.curtin.comp2003.rover.EarthComm;
 
+/** 
+ * This class is used to run a separate thread that runs parallel to the main program. This thread deals with polling commands, i.e. receiving
+ * the commands from Earth
+ */
 public class PollingThread implements Runnable
 {
     private Thread t;
@@ -10,13 +13,14 @@ public class PollingThread implements Runnable
     private String[] buffer;
     private EarthComm comms;
 
-    public PollingThread(EarthComm c)//Thread t)
+    public PollingThread(EarthComm c)
     {
-        //System.out.println("Polling Thread created");
         comms = c;
-        //this.t = t;
     }
 
+    /**
+     * when the thread is started, this function is called
+     */
     @Override
     public void run()
     {
@@ -29,7 +33,6 @@ public class PollingThread implements Runnable
     //@Override
     public void start()
     {
-        //System.out.println("Starting polling thread");
         if(t == null)
         {
             t = new Thread(this);
@@ -44,6 +47,7 @@ public class PollingThread implements Runnable
         }
     }
 
+    // the following getters are necessary due to the MarsRoverApp needing access to this class's class fields for the software's functionality
     public String getPolledCmd()
     {
         return polledCmd;

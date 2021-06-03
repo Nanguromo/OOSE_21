@@ -7,7 +7,9 @@ import edu.curtin.comp2003.rover.Sensors;
 import edu.curtin.comp2003.rover.EngineSystem;
 import edu.curtin.comp2003.controller.DistanceIncrement;
 
-
+/**
+ * The rover's driving state.
+ */
 public class Driving implements ICommandsState
 {
     private EarthHQ context;
@@ -22,6 +24,9 @@ public class Driving implements ICommandsState
     }
 
 
+    /**
+     * Drives a fixed distance.
+     */
     @Override
     public void driveFixedDistance(double distance)
     {
