@@ -16,10 +16,10 @@ whenever Thread.sleep() was called, it was simlpy dealt with in its respective c
 
 3. Implementation of dependency injection.
 
-In my design, I felt the need for a Factory was unecessary. Consequently, to adhere to dependenction principles, all Class Objects created
-was done in the main class, MarsRoverApp, and injected into where it was need. This allowed, easy debugging and tracking off object errors
+In my design, I felt the need for a Factory was unecessary. Consequently, to adhere to dependency injection principles, all Class Objects created
+were done in the main class, MarsRoverApp, and injected into where it was need. This allowed, easy debugging and tracking of object errors
 as it would be easier to tell where errors for these classes were coming from. Furthermore, no singletons were used as it was recommended by
-the problem statement. Despite this, the Rover API Objects act similar to a singleton as they only have one instance allowed, but this is done
+the problem statement. Despite this, the Rover API Objects acts similar to a singleton as they only have one instance allowed, but this is done
 to maintain data easier, and due to the fact it would not make sense to have multiple objects of the Rover API classes in the first place. i.e.
 Why would multiple EngineSystem objects be needed? There is only one Rover.
 
@@ -36,18 +36,18 @@ principles and how complex systems can be made with simple code with the assista
 5. Use of polymorphism #2
 
 Initially it was quite a struggle thinking of what other polymorphic inheritance hierarchy I could implement that would ASSIST with meeting the system
-requirements of this problem. It was only until I realised that, I could use my controller class to service as both the "Context" for the State Pattern, but
-could simultaneously use it to serve as the "Subject" for the Observer pattern. Furthermore, this made great sense to me, because the controller is suppose
+requirements of this problem. It was only until I realised that, I could use my controller class to serve as both the "Context" for the State Pattern, and 
+simultaneously use it to serve as the "Subject" for the Observer pattern. Furthermore, this made great sense to me, because the controller is suppose
 to be the "brains" behind the program. Consequently, the second polymorphism design choice was The Observer Pattern. This made sense to use in the design because
-the majority of the methods within the system were void and did not really care what happens when called. Therefore, my I used The Observer Pattern to alert the 
+the majority of the methods within the system were void and did not care what happened when called. Therefore, I used The Observer Pattern to alert the 
 Observers (different return messages) when a command received from the rover was COMPLETE. Upon completetion of a command, notifyObserver() is called which passes
-a String, corresponding to different return messages,i.e. "D" or "S". This String acted as a flag, and if the flag matched the internal class field flag of an Observer,
+a String, corresponding to different return messages, i.e. "D" or "S". This String acted as a flag, and if the flag matched the internal class field flag of an Observer,
 the Observer would send its flag to Earth, letting the scientists on Earth know a command was successfully complete, or invalid (! ...).
 
 6. Clear and correct UML
 
 My UML was constructed to illustrate the software system that I created. To analyse it critically, I believe my design could still be improved significantly. This was
-evident by seeing the amount of lines illustrating the different inheritance hierarchies. Aside from demonstrating a complex inheritance hierarchu, I think it also suggests 
+evident by seeing the amount of lines illustrating the different inheritance hierarchies. Aside from demonstrating a complex inheritance hierarchy, I think it also suggests 
 that If I were to do this assignment in the future; it means I need to refactor my design to de-couple it further.
 
 7. Bonus: Generics

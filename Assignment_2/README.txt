@@ -7,7 +7,7 @@ How to compile:
  - Within the Assignment_2 directory, simply type "ant" 
 
 How to run:
- - Go to the "dist" directory and write "java -jar MarsRoverApplication.java"
+ - Go to the "dist" directory and write "java -jar MarsRover.java"
  - Will loop forever, so when you are ready to exit, type "Ctr + C"
 
 Testing:

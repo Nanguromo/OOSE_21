@@ -15,8 +15,8 @@ public class EarthComm
 
                 //STUB CODDE...
                 String cmd;
-                //cmd = "S\nP\nD\nD 23.1\nT 75.5\nE";
-                cmd = "S\nS\nP\nE\nT 23.5\nT56.6\n\nsss12131\nerr eerror\nD\nD 22.1\nS";
+                cmd = "S\nP\nD\nD 23.1\nT 75.5\nE";
+                //cmd = "S\nS\nP\nE\nT 23.5\nT56.6\n\nsss12131\nerr eerror\nD\nD 22.1\nS";
                 //cmd = "D 12.55\nT 123.3\nerror\nS 65.6\nD 31.3\nT 15.2";
                 return cmd;
         }
