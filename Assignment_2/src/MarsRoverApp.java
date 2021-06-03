@@ -22,7 +22,7 @@ public class MarsRoverApp
         EarthHQ hq = new EarthHQ(es, sa, sens, comms, commFin); // probably inject EarthHQ's fields here
 
         //...poll everything...
-
+        //System.out.println(t1);
         
         while(true)
         {
@@ -34,6 +34,7 @@ public class MarsRoverApp
 
             hq.start();/*this thread will always check the environment visibility level and return the environment
             conditions if the visibility crosses below 4km or rises above 5km.*/
+            //System.out.println(t1);
 
             //if(polledCmd == null)
             if(t1.getPolledCmd() == null)

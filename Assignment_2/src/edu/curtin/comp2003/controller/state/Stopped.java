@@ -6,7 +6,7 @@ import edu.curtin.comp2003.rover.EngineSystem;
 import edu.curtin.comp2003.rover.Sensors;
 import edu.curtin.comp2003.rover.SoilAnalyser;
 import edu.curtin.comp2003.controller.EarthHQ;
-import edu.curtin.comp2003.rover.DistanceIncrement;
+import edu.curtin.comp2003.controller.DistanceIncrement;
 
 public class Stopped implements ICommandsState
 {

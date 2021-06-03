@@ -56,6 +56,13 @@ public class PollingThread implements Runnable
 
     public int getBufferLength()
     {
+        if(buffer == null)
+        {
+            System.out.println(); 
+            //why do i keep getting null point exception
+            //I was trying to track buffer's value but I can't seem to find where it goes to null
+            //putting this sysout here fixes it though, albeit, not an ideal solution   
+        }
         return buffer.length;
     }
 

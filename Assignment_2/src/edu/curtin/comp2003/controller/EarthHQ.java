@@ -10,9 +10,6 @@ import edu.curtin.comp2003.rover.Sensors;
 import edu.curtin.comp2003.controller.state.*;
 import edu.curtin.comp2003.rover.EarthComm;
 
-
-import edu.curtin.comp2003.model.Environment;
-
 public class EarthHQ implements Runnable
 {
     private ICommandsState state; //current state

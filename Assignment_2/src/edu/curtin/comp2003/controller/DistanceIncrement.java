@@ -1,4 +1,4 @@
-package edu.curtin.comp2003.rover;
+package edu.curtin.comp2003.controller;
 
 import edu.curtin.comp2003.rover.EngineSystem;
 

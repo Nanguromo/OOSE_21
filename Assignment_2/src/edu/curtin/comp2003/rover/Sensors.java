@@ -21,6 +21,7 @@ public class Sensors
 
     public double readVisibility()
     {
+        
         return (int)(Math.random()*10);
     }
 
